@@ -13,7 +13,6 @@ public class Avion {
     public static final double VOLUME_MAXIMAL_EN_LITRES_EN_CABINE = 30;
 
     public static final int SECONDES_PAR_HEURE = 3600;
-    public static final int DUREE_VOL_MAXIMUM_AVEC_ANIMAUX_EN_SECONDES = 10 * Avion.SECONDES_PAR_HEURE;
 
     private final PlanVol planVol;
     private final double capaciteChargementEnKg;
@@ -59,9 +58,15 @@ public class Avion {
         this.animauxEnSoute.add(bagage);
     }
 
-    public double remplir(Carburant carburant) {
+    /* R1 - Régler CSQ en séparant la présente commande et requête : créer une nouvelle méthode pour avoir une query sur la capacité
+            de chargement restant. Et pour la méthode remplir la changer pour une commande (void)
+    * */
+    public void remplir(Carburant carburant) {
         this.carburant = carburant;
-        return this.capaciteChargementEnKg - this.carburant.calculerPoidsEnKg();
+    }
+
+    public double getCapaciteChargementEnKgRestant() {
+        return this.capaciteChargementEnKg - this.calculerPoidsChargementTotal();
     }
 
     public double getPoidsPassagers() {
@@ -111,8 +116,15 @@ public class Avion {
                 && this.isLimiteVolumeRespectee();
     }
 
+    /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. */
     public boolean isCargoVivantEnSecurite(boolean hasAnimaux) {
-        return !hasAnimaux || this.planVol.getDureePrevue() <= Avion.DUREE_VOL_MAXIMUM_AVEC_ANIMAUX_EN_SECONDES;
+        return !hasAnimaux || this.planVol.isCargoVivantEnSecurite();
+    }
+
+    public void informerPlanVolCargoVivant(boolean hasAnimaux) {
+        if (hasAnimaux) {
+            this.planVol.cargoVivantPresent();
+        }
     }
 
     private boolean isLimiteVolumeRespectee() {

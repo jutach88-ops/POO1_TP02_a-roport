@@ -123,7 +123,9 @@ class AvionTest {
 
     @Test
     public void etantDonneUnAvionAlorsRemplirRetourneLePoidsUtileRestant() {
-        double poidsUtileRestant = this.avion.remplir(new Carburant(AvionTest.VOLUME_CARBURANT_EN_LITRE));
+        this.avion.remplir(new Carburant(AvionTest.VOLUME_CARBURANT_EN_LITRE));
+
+        double poidsUtileRestant = this.avion.getCapaciteChargementEnKgRestant();
 
         assertEquals(
                 AvionTest.CAPACITE_POIDS_KG - new Carburant(AvionTest.VOLUME_CARBURANT_EN_LITRE).calculerPoidsEnKg(),
