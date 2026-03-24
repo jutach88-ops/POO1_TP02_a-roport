@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CheckStyle-IDEA" serialisationVersion="2">
+    <checkstyleVersion>10.13.0</checkstyleVersion>
+    <scanScope>JavaOnly</scanScope>
+    <copyLibs>true</copyLibs>
+    <option name="thirdPartyClasspath" />
+    <option name="activeLocationIds" />
+    <option name="locations">
+      <list>
+        <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="b672aa86-d581-4ea6-b526-9afbce88c921" type="LOCAL_FILE" scope="All" description="CSF">$PROJECT_DIR$/../../../h24/Services Web/Fichiers de configuration/CSF_Checkstyle.xml</ConfigurationLocation>
+      </list>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-25" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

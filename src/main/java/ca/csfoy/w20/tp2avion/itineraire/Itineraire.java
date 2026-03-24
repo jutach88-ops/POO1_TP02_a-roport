@@ -1,0 +1,69 @@
+package ca.csfoy.w20.tp2avion.itineraire;
+
+public class Itineraire {
+
+    private final double distanceEnKm;
+
+    public Itineraire(double distanceEnKm) {
+        this.distanceEnKm = distanceEnKm;
+    }
+
+    public double calculerDistance() {
+        return this.distanceEnKm;
+    }
+
+    /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et
+     * getArrivees()
+     *
+     * si le nombre de départs est différent du nombre d'arrivées
+     *     retourner faux
+     * si la différence entre les deux listes n'est pas unique dans les deux sens (départ -> arrivée et arrivée -> départ)
+     *     retourner faux
+     * retourner vrai
+     *
+     *
+     * pour chaque aéroport dans comparaison
+     * si l'aéroport n'est pas dans source
+     *    incrémenter le compteur
+     * retourner vrai si le compteur est exactement 1
+     *
+     * Vérifier si tous les segments sont connectés
+     * A -> B, B -> C, C -> D [Départs A, B, C] [Arrivées B, C, D]
+     *
+     * Départs -> Arrivées -> A manquant (1 seul)
+     * Arrivées -> Départs -> D manquant (1 seul)
+     *
+     * Itinéraire: OK
+     *
+     */
+
+
+    /* R8 – Aide à la validation de l'itinéraire
+     * Permet de récupérer l'ensemble des départs sans doublons
+     * private ArrayList<Aeroport> getDeparts() { ... }
+     */
+    /* private ArrayList<Aeroport> getDeparts() {
+        ArrayList<Aeroport> departs = new ArrayList<>();
+        for (Segment segment : this.segments) {
+            if (!departs.contains(segment.getDepart())) {
+                departs.add(segment.getDepart());
+            }
+        }
+        return departs;
+    }*/
+
+    /* R8 – Aide à la validation de l'itinéraire
+     * Permet de récupérer l'ensemble des arrivées sans doublons
+     * private ArrayList<Aeroport> getArrivees() { ... }
+     */
+    /* private ArrayList<Aeroport> getArrivees() {
+        ArrayList<Aeroport> arrives = new ArrayList<>();
+        for (Segment segment : this.segments) {
+            if (!arrives.contains(segment.getArrive())) {
+                arrives.add(segment.getArrive());
+            }
+        }
+        return arrives;
+    }*/
+
+}
