@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanVolTest {
@@ -75,5 +76,23 @@ class PlanVolTest {
         String resultat = planVolAvecReserve.toString();
 
         assertTrue(resultat.contains("10.0"));
+    }
+
+    @Test
+    public void etantDonneCarburantLorsqueInsuffisantAlorsInvalide() {
+        Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
+
+        boolean estCarburantSuffisant = this.planVol.isCarburantSuffisant(carburant);
+
+        assertFalse(estCarburantSuffisant);
+    }
+
+    @Test
+    public void etantDonneCarburantLorsqueSuffisantAlorsValide() {
+        Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
+
+        boolean estCarburantSuffisant = this.planVol.isCarburantSuffisant(carburant);
+
+        assertTrue(estCarburantSuffisant);
     }
 }
