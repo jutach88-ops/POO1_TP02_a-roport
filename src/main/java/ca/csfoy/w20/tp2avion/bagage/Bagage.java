@@ -1,5 +1,9 @@
 package ca.csfoy.w20.tp2avion.bagage;
 
+import ca.csfoy.w20.tp2avion.Avion;
+
+import java.util.ArrayList;
+
 public final class Bagage {
 
     public static final double SEUIL_POIDS_INVALIDE = 0;
@@ -35,5 +39,9 @@ public final class Bagage {
 
     public double getVolumeEnLitres() {
         return this.volumeEnLitres;
+    }
+
+    public boolean estBagageConforme(double volumeMaximalEnLitre) {
+        return this.getVolumeEnLitres() <= volumeMaximalEnLitre;
     }
 }

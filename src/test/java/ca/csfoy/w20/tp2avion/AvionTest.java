@@ -177,19 +177,7 @@ class AvionTest {
         assertFalse(this.avion.autoriseADecoller());
     }
 
-    @Test
-    public void etantDonneUnAvionAvecBagageSouteDepassantLaLimiteDeVolumeIndividuelleAlorsNonAutoriseADecoller() {
-        this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE + 1));
 
-        assertFalse(this.avion.autoriseADecoller());
-    }
-
-    @Test
-    public void etantDonneUnAvionAvecBagageSouteExactementALaLimiteDeVolumeIndividuelleAlorsAutoriseADecoller() {
-        this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE));
-
-        assertTrue(this.avion.autoriseADecoller());
-    }
 
     @Test
     public void etantDonneUnAvionDepassantLaCapaciteTotaleEnSouteAlorsNonAutoriseADecoller() {
@@ -257,6 +245,20 @@ class AvionTest {
     @Test
     public void etantDonneUnAvionAvecBagageCabineExactementALaLimiteDeVolumeIndividuelleAlorsAutoriseADecoller() {
         this.avion.ajouterBagageEnCabine(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_EN_CABINE));
+
+        assertTrue(this.avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneUnAvionAvecBagageSouteDepassantLaLimiteDeVolumeIndividuelleAlorsNonAutoriseADecoller() {
+        this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE + 1));
+
+        assertFalse(this.avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneUnAvionAvecBagageSouteExactementALaLimiteDeVolumeIndividuelleAlorsAutoriseADecoller() {
+        this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE));
 
         assertTrue(this.avion.autoriseADecoller());
     }
