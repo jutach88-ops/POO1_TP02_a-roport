@@ -128,13 +128,12 @@ public class Avion {
         return this.getVolumeEnSoute() <= this.capaciteChargementSouteEnLitres;
     }
 
+    /* R3 - Le présent bris concerte un TDA car l'Avion demande a carburant si le carburant est suffisant. L'expert est carburant,
+    *       c'est lui qui sait en fonction de ces attributs et caractéristiques de classe s'il est suffisant pour le vol. Cependant,
+    *       faire attention au bris potentiel de Déméter, car carburant et PlanVol ne sont pas amis. S'assurer de passer les données
+    *       brutes de PlanVol en paramètres. */
     private boolean isCarburantSuffisant() {
-        double poidsCarburant = this.carburant.calculerPoidsEnKg();
-        double autonomieEnSecondes = poidsCarburant / Carburant.CONSOMMATION_PAR_HEURE_EN_KG * Avion.SECONDES_PAR_HEURE;
-        long dureePrevue = Math.round(
-                this.planVol.getDureePrevue() * (1 + this.planVol.getReserveCarburantMinimale())
-        );
-        return dureePrevue <= autonomieEnSecondes;
+        return this.carburant.isCarburantSuffisant(this.planVol.getDureePrevue(), this.planVol.getReserveCarburantMinimale());
     }
 
     private boolean isVolumeBagagesSouteConforme() {

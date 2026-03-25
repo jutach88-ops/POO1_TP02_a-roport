@@ -8,17 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanVolTest {
-    private static final int VITESSE_CROISIERE = 900;
-    private static final double RESERVE_10_POURCENT = 0.10;
-    private static final double RESERVE_0_POURCENT = 0.0;
+    public static final int VITESSE_CROISIERE = 900;
+    public static final double RESERVE_10_POURCENT = 0.10;
+    public static final double RESERVE_0_POURCENT = 0.0;
 
-    private static final double DISTANCE_QUEBEC_MONTREAL = 232.93;
-    private static final long DUREE_QUEBEC_MONTREAL =
+    public static final double DISTANCE_QUEBEC_MONTREAL = 232.93;
+    public static final long DUREE_QUEBEC_MONTREAL =
             Math.round(
                     PlanVolTest.DISTANCE_QUEBEC_MONTREAL / PlanVolTest.VITESSE_CROISIERE * PlanVol.SECONDES_PAR_HEURE);
 
-    private PlanVol planVol;
-    private Itineraire itineraire;
+    public PlanVol planVol;
+    public Itineraire itineraire;
 
     @BeforeEach
     public void setUp() {

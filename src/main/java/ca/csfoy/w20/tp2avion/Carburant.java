@@ -32,4 +32,13 @@ public class Carburant {
     public String toString() {
         return this.volumeEnLitre + " L (" + (round(this.calculerPoidsEnKg() * 100) / 100.0) + " kg)";
     }
+
+    /* R4 - Régler le SRP présent: */
+    public boolean isCarburantSuffisant(long dureePrevuPlanVol, double reserveCarburantMinimalePlanVol) {
+        double autonomieEnSecondes = this.calculerPoidsEnKg() / Carburant.CONSOMMATION_PAR_HEURE_EN_KG * Carburant.SECONDES_PAR_HEURE;
+        long dureePrevue = round(
+                dureePrevuPlanVol * (1 + reserveCarburantMinimalePlanVol)
+        );
+        return dureePrevue <= autonomieEnSecondes;
+    }
 }
