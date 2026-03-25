@@ -54,8 +54,10 @@ public class Avion {
         }
     }
 
+    /* R2 - Ajout de la commande pour informer PlanVol qu'il y a bien des animaux à bord. */
     public void ajouterAnimalEnSoute(Bagage bagage) {
         this.animauxEnSoute.add(bagage);
+        this.planVol.cargoVivantPresent();
     }
 
     /* R1 - Régler CSQ en séparant la présente commande et requête : créer une nouvelle méthode pour avoir une query sur la capacité
@@ -108,7 +110,7 @@ public class Avion {
     }
 
     public boolean autoriseADecoller() {
-        return this.isCargoVivantEnSecurite(!this.animauxEnSoute.isEmpty())
+        return this.isCargoVivantEnSecurite()
                 && this.isCarburantSuffisant()
                 && this.isVolumeBagagesSouteConforme()
                 && this.isVolumeBagagesCabineConforme()
@@ -116,15 +118,10 @@ public class Avion {
                 && this.isLimiteVolumeRespectee();
     }
 
-    /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. */
-    public boolean isCargoVivantEnSecurite(boolean hasAnimaux) {
-        return !hasAnimaux || this.planVol.isCargoVivantEnSecurite();
-    }
-
-    public void informerPlanVolCargoVivant(boolean hasAnimaux) {
-        if (hasAnimaux) {
-            this.planVol.cargoVivantPresent();
-        }
+    /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. Voir plus
+    * haut la fonction ajouterAnimalEnSoute(), c'est elle qui informe PlanVol de présence de cargo vivant. */
+    public boolean isCargoVivantEnSecurite() {
+        return this.planVol.isCargoVivantEnSecurite();
     }
 
     private boolean isLimiteVolumeRespectee() {
@@ -217,7 +214,7 @@ public class Avion {
                 + ", volumeRespete=" + this.isLimiteVolumeRespectee()
                 + ", bagagesSouteConformes=" + this.isVolumeBagagesSouteConforme()
                 + ", bagagesCabineConformes=" + this.isVolumeBagagesCabineConforme()
-                + ", cargoVivantEnSecurite=" + this.isCargoVivantEnSecurite(!this.animauxEnSoute.isEmpty())
+                + ", cargoVivantEnSecurite=" + this.isCargoVivantEnSecurite()
                 + "}";
 
     }

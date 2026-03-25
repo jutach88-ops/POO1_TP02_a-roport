@@ -52,6 +52,22 @@ class PlanVolTest {
     }
 
     @Test
+    public void etantDonneCargoVivantLorsquePresentAlorsEstEnSecurite() {
+        this.planVol.cargoVivantPresent();
+
+        boolean estCargoVivantEnSecurite = this.planVol.isCargoVivantEnSecurite();
+
+        assertTrue(estCargoVivantEnSecurite);
+    }
+
+    @Test
+    public void etantDonneCargoVivantLorsqueNonPresentAlorsEstEnSecurite() {
+        boolean estCargoVivantEnSecurite = this.planVol.isCargoVivantEnSecurite();
+
+        assertTrue(estCargoVivantEnSecurite);
+    }
+
+    @Test
     public void etantDonneUnPlanVolAvecReserveAlorsToStringContientLePourcentageDeReserve() {
         PlanVol planVolAvecReserve = new PlanVol(this.itineraire, PlanVolTest.VITESSE_CROISIERE,
                 PlanVolTest.RESERVE_10_POURCENT);

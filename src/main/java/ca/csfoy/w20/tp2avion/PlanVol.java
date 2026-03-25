@@ -40,7 +40,7 @@ public class PlanVol {
     }
 
     public boolean isCargoVivantEnSecurite() {
-        return this.getDureePrevue() <= PlanVol.DUREE_VOL_MAXIMUM_AVEC_ANIMAUX_EN_SECONDES;
+        return !this.estCargoVivantPresent || this.getDureePrevue() <= PlanVol.DUREE_VOL_MAXIMUM_AVEC_ANIMAUX_EN_SECONDES;
     }
 
     public void cargoVivantPresent() {
