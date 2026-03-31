@@ -42,7 +42,7 @@ public class Coordonnee {
      * Utilise la formule Haversine pour calculer la distance euclidienne entre deux points sur une sphere
      *
      * @param Coordonnee
-     *         objet avec lequel on veut calucler la distance
+     *         objet avec lequel on veut calculer la distance
      * @return retourne la distance entre deux points en kilometres
      */
     public double distanceEnKm(Coordonnee autre) {

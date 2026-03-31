@@ -1,15 +1,30 @@
 package ca.csfoy.w20.tp2avion.itineraire;
 
+import java.util.ArrayList;
+
 public class Itineraire {
 
     private final double distanceEnKm;
+    private final ArrayList<Segment> segments = new ArrayList<>();
+    private int nombreDeSegment = 0;
 
     public Itineraire(double distanceEnKm) {
         this.distanceEnKm = distanceEnKm;
     }
 
+    public void ajoutSegment(Segment segment) {
+        if (segments.contains(segment)) {
+            throw new IllegalArgumentException("Un itinéraire ne peut pas avoir deux fois le même segment.");
+        }
+        this.segments.add(segment);
+        this.nombreDeSegment ++;
+    }
+
     public double calculerDistance() {
         return this.distanceEnKm;
+    }
+    public double calculerDistanceCoordonnee(Segment segment) {
+
     }
 
     /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et

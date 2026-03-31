@@ -47,12 +47,12 @@ public class PlanVol {
         this.estCargoVivantPresent = true;
     }
 
-    /* R3 - Le présent bris concerte un TDA car l'Avion demande a carburant si le carburant est suffisant. L'expert est carburant,
+    /* R3 - Le présent bris concerte un TDA car l'Avion demande au carburant si le carburant est suffisant. L'expert est carburant,
      *       c'est lui qui sait en fonction de ces attributs et caractéristiques de classe s'il est suffisant pour le vol. Cependant,
      *       faire attention au bris potentiel de Déméter, car carburant et PlanVol ne sont pas amis. S'assurer de passer les données
      *       brutes de PlanVol en paramètres. */
-    /* R4 - Régler le SRP présent: Ici au sujet de Carburant, sa responsabilité unique est de donner des informations sur lui même (il peut dire par rapport
-             à une durée donnée si il couvre la durée mais non par rapport à un vol directement. C'est la responsabilité de planDeVol) et
+    /* R4 - Régler le SRP présent : Ici au sujet de Carburant, sa responsabilité unique est de donner des informations sur lui-même (il peut dire par rapport
+             à une durée donnée s'il couvre la durée, mais non par rapport à un vol directement). C'est la responsabilité de planDeVol et
      *       non de dire s'il est suffisant pour un vol. C'est plan de vol qui a la responsabilité de dire si en fonction des informations
      *       de vol le vol est prêt et sécuritaire. */
     public boolean isCarburantSuffisant(Carburant carburant) {
