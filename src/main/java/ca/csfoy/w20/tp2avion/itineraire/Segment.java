@@ -6,7 +6,7 @@ public class Segment {
 
     private final Aeroport aeroportDepart;
     private final Aeroport aeroportArrivee;
-//    private final float distanceEnKm;
+    //    private final float distanceEnKm;
 
     public Segment(Aeroport aeroportDepart, Aeroport aeroportArrivee) {
         this.validationCodeAeroport(aeroportDepart);
@@ -19,7 +19,7 @@ public class Segment {
 
     private void validationCodeAeroport(Aeroport codeAeroport) {
         if (codeAeroport == null) {
-          throw new IllegalArgumentException("Le code d'aéroport entré est invalide.");
+            throw new IllegalArgumentException("Le code d'aéroport entré est invalide.");
         }
     }
 
@@ -37,9 +37,9 @@ public class Segment {
         return this.aeroportArrivee;
     }
 
-//    private void calculerDistanceKmSegment() {
-//        Coordonnee Depart = RegistresAeroport.initialiserAeroport(this.aeroportDepart);
-//    }
+    public double calculerDistanceAeroport() {
+        return  this.aeroportDepart.getDistance(this.aeroportArrivee);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -50,7 +50,8 @@ public class Segment {
             return false;
         }
         Segment segment = (Segment) obj;
-        return this.aeroportDepart.equals(segment.aeroportDepart) && this.aeroportArrivee.equals(segment.aeroportArrivee);
+        return this.aeroportDepart.equals(segment.aeroportDepart) && this.aeroportArrivee.equals(
+                segment.aeroportArrivee);
     }
 
     @Override
@@ -58,8 +59,8 @@ public class Segment {
         return Objects.hash(aeroportDepart, aeroportArrivee);
     }
 
-//    @Override
-//    public String toString() {
-//        return this.nom + "[" + this.code + "]" + this.coordonnee;
-//    }
+    //    @Override
+    //    public String toString() {
+    //        return this.nom + "[" + this.code + "]" + this.coordonnee;
+    //    }
 }

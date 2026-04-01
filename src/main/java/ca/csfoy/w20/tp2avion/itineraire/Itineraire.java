@@ -4,27 +4,44 @@ import java.util.ArrayList;
 
 public class Itineraire {
 
-    private final double distanceEnKm;
     private final ArrayList<Segment> segments = new ArrayList<>();
+
+    private double distanceEnKm;
     private int nombreDeSegment = 0;
 
-    public Itineraire(double distanceEnKm) {
-        this.distanceEnKm = distanceEnKm;
+    public Itineraire() {
     }
 
     public void ajoutSegment(Segment segment) {
         if (segments.contains(segment)) {
             throw new IllegalArgumentException("Un itinéraire ne peut pas avoir deux fois le même segment.");
         }
+        validerSegment(segment);
         this.segments.add(segment);
-        this.nombreDeSegment ++;
+        this.calculerLongueurItineraireKm(segment);
+        this.nombreDeSegment++;
+    }
+
+    public void validerSegment(Segment segment) {
+        if (segment == null) {
+            throw new IllegalArgumentException("Le segment est invalide, veuillez entrer un segment valide.");
+        }
+    }
+
+    public int getNombreDeSegment() {
+        return this.nombreDeSegment;
     }
 
     public double calculerDistance() {
         return this.distanceEnKm;
     }
-    public double calculerDistanceCoordonnee(Segment segment) {
 
+    public double calculerDistanceKmSegment(Segment segment) {
+        return segment.calculerDistanceAeroport();
+    }
+
+    private void calculerLongueurItineraireKm(Segment segment) {
+        this.distanceEnKm += calculerDistanceKmSegment(segment);
     }
 
     /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et

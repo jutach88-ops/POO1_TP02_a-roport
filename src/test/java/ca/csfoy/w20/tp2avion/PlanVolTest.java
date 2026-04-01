@@ -23,7 +23,7 @@ class PlanVolTest {
 
     @BeforeEach
     public void setUp() {
-        this.itineraire = new Itineraire(PlanVolTest.DISTANCE_QUEBEC_MONTREAL);
+        this.itineraire = TestFactory.itineraireCourtQcMtl;
         this.planVol =
                 new PlanVol(this.itineraire, PlanVolTest.VITESSE_CROISIERE,
                         PlanVolTest.RESERVE_0_POURCENT);

@@ -48,13 +48,15 @@ class AvionTest {
                         / Carburant.SECONDES_PAR_HEURE);
     }
 
+
+
     @BeforeEach
     public void setUp() {
         this.planVolCourt = new PlanVol(
-                new Itineraire(AvionTest.DISTANCE_QUEBEC_MONTREAL), AvionTest.VITESSE_CROISIERE,
+                TestFactory.itineraireCourtQcMtl, AvionTest.VITESSE_CROISIERE,
                 AvionTest.RESERVE_0_POURCENT);
         this.planVolLong = new PlanVol(
-                new Itineraire(AvionTest.DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER), AvionTest.VITESSE_CROISIERE,
+                TestFactory.itineraireLongQcMtlTorontoParisVancouver, AvionTest.VITESSE_CROISIERE,
                 AvionTest.RESERVE_0_POURCENT);
         this.avion = new Avion(this.planVolCourt, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
         this.avion.remplir(new Carburant(AvionTest.VOLUME_CARBURANT_SUFFISANT));

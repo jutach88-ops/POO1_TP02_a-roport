@@ -6,28 +6,33 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SegmentTest {
 
-//    @Test
-//    void etantDonneSegmentLorsqueInstantiationParametreValideAlorsValide() {
-//        Aeroport aeroportYQB = RegistresAeroport.initialiserAeroport(CodeAeroport.YQB);
-//        Aeroport aeroportYUL = RegistresAeroport.initialiserAeroport(CodeAeroport.YUL);
-//        Segment segment = new Segment(aeroportYQB, aeroportYUL);
-//
-//        assertEquals(CodeAeroport.YQB, segment.getAeroportDepart());
-//        assertEquals(CodeAeroport.YUL, segment.getAeroportArrivee());
-//    }
-//
-//    @Test
-//    void etantDonneSegmentLorsqueInstantiationAeroportDepartNullAlorsNonValide() {
-//        assertThrows(IllegalArgumentException.class, () -> new Segment(null, CodeAeroport.YUL));
-//    }
-//
-//    @Test
-//    void etantDonneSegmentLorsqueInstantiationAeroportArriveeNullAlorsNonValide() {
-//        assertThrows(IllegalArgumentException.class, () -> new Segment(CodeAeroport.AMS, null));
-//    }
-//
-//    @Test
-//    void etantDonneSegmentLorsqueInstantiationMemeAeroportArriveeDepartAlorsNonValide() {
-//        assertThrows(IllegalArgumentException.class, () -> new Segment(CodeAeroport.AMS, CodeAeroport.AMS));
-//    }
+    public static Segment quebecMontreal = new Segment(AeroportTest.aeroportYQB,AeroportTest.aeroportYUL);
+    public static Segment montrealToronto = new Segment(AeroportTest.aeroportYUL,AeroportTest.aeroportYYZ);
+    public static Segment torontoVancouver = new Segment(AeroportTest.aeroportYYZ,AeroportTest.aeroportYVR);
+    public static Segment vancouverOrlando = new Segment(AeroportTest.aeroportYVR,AeroportTest.aeroportMCO);
+    public static Segment orlandoCancun = new Segment(AeroportTest.aeroportMCO,AeroportTest.aeroportCUN);
+    public static Segment cancunParis = new Segment(AeroportTest.aeroportCUN,AeroportTest.aeroportCDG);
+
+    @Test
+    void etantDonneSegmentLorsqueInstantiationParametreValideAlorsValide() {
+        Segment segment = new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYUL);
+
+        assertEquals(AeroportTest.aeroportYQB, segment.getAeroportDepart());
+        assertEquals(AeroportTest.aeroportYUL, segment.getAeroportArrivee());
+    }
+
+    @Test
+    void etantDonneSegmentLorsqueInstantiationAeroportDepartNullAlorsNonValide() {
+        assertThrows(IllegalArgumentException.class, () -> new Segment(null, AeroportTest.aeroportYUL));
+    }
+
+    @Test
+    void etantDonneSegmentLorsqueInstantiationAeroportArriveeNullAlorsNonValide() {
+        assertThrows(IllegalArgumentException.class, () -> new Segment(AeroportTest.aeroportYQB, null));
+    }
+
+    @Test
+    void etantDonneSegmentLorsqueInstantiationMemeAeroportArriveeDepartAlorsNonValide() {
+        assertThrows(IllegalArgumentException.class, () -> new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYQB));
+    }
 }

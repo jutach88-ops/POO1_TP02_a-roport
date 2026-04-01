@@ -10,6 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AeroportTest {
 
+    public static final Aeroport aeroportYQB = RegistresAeroport.initialiserAeroport(CodeAeroport.YQB);
+    public static final Aeroport aeroportYUL = RegistresAeroport.initialiserAeroport(CodeAeroport.YUL);
+    public static final Aeroport aeroportYYZ = RegistresAeroport.initialiserAeroport(CodeAeroport.YYZ);
+    public static final Aeroport aeroportYVR = RegistresAeroport.initialiserAeroport(CodeAeroport.YVR);
+    public static final Aeroport aeroportMCO = RegistresAeroport.initialiserAeroport(CodeAeroport.MCO);
+    public static final Aeroport aeroportCUN = RegistresAeroport.initialiserAeroport(CodeAeroport.CUN);
+    public static final Aeroport aeroportCDG = RegistresAeroport.initialiserAeroport(CodeAeroport.CDG);
+    public static final Aeroport aeroportAMS = RegistresAeroport.initialiserAeroport(CodeAeroport.AMS);
+
+
+
     public static final Coordonnee COORDONNEE_QUEBEC = new Coordonnee(46.81, -71.20);
     public static final String VILLE_QUEBEC = "Québec";
     public static final String VILLE_MONTREAL = "Montréal";
