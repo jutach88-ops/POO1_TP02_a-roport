@@ -1,12 +1,12 @@
 package ca.csfoy.w20.tp2avion.itineraire;
 
+import ca.csfoy.w20.tp2avion.PlanVol;
+import ca.csfoy.w20.tp2avion.TestFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItineraireTest {
-
-
 
     @Test
     void etantDonneItinéraireLorsqueSansSegmentAlorsValide() {
@@ -54,6 +54,27 @@ class ItineraireTest {
         itineraire.ajoutSegment(segment1);
 
         assertThrows(IllegalArgumentException.class, () -> itineraire.ajoutSegment(segment2));
+    }
+
+    @Test
+    void etantDonneItineraireLosrqueAucunSegmentAlorsValeurAttendue() {
+        Itineraire itineraire = new Itineraire();
+
+        assertEquals(0, itineraire.calculerDistance());
+    }
+
+    @Test
+    void etantDonneItineraireLosrqueUnSeulSegmentAlorsValeurAttendue() {
+        Itineraire itineraire = TestFactory.itineraireCourtQcMtl;
+
+        assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL, itineraire.calculerDistance(), 0.01);
+    }
+
+    @Test
+    void etantDonneItineraireLosrqueSegmentPlusieursSegmentsAlorsValeurAttendue() {
+        Itineraire itineraire = TestFactory.itineraireLongQcMtlTorontoParisVancouver;
+
+        assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER, itineraire.calculerDistance(), 0.01);
     }
 
 }

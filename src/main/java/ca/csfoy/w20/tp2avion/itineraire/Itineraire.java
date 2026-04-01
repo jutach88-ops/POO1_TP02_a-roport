@@ -9,9 +9,6 @@ public class Itineraire {
     private double distanceEnKm;
     private int nombreDeSegment = 0;
 
-    public Itineraire() {
-    }
-
     public void ajoutSegment(Segment segment) {
         if (segments.contains(segment)) {
             throw new IllegalArgumentException("Un itinéraire ne peut pas avoir deux fois le même segment.");
@@ -36,12 +33,8 @@ public class Itineraire {
         return this.distanceEnKm;
     }
 
-    public double calculerDistanceKmSegment(Segment segment) {
-        return segment.calculerDistanceAeroport();
-    }
-
     private void calculerLongueurItineraireKm(Segment segment) {
-        this.distanceEnKm += calculerDistanceKmSegment(segment);
+        this.distanceEnKm += segment.calculerDistanceAeroport();
     }
 
     /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et

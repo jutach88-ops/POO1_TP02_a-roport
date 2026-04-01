@@ -15,7 +15,7 @@ public class Main {
     public Main() {
 
 
-        PlanVol planVol = new PlanVol(Factory.itineraireLongQcMtlTorontoParisVancouver, 800, 0.18);
+        PlanVol planVol = new PlanVol(Factory.itineraireLongQcTorontoParis, 800, 0.18);
 
         this.avion = new Avion(
                 planVol,

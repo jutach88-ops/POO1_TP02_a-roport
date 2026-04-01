@@ -8,6 +8,10 @@ import ca.csfoy.w20.tp2avion.itineraire.Segment;
 
 public class TestFactory {
 
+    public static final double DISTANCE_QUEBEC_MONTREAL = 232.93;
+    public static final double DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER = 14660.11;
+
+
     //Creation Aeroport
 
     public static final Aeroport aeroportYQB = RegistresAeroport.initialiserAeroport(CodeAeroport.YQB);

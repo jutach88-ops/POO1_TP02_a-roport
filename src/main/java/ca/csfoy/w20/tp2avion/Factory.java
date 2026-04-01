@@ -25,7 +25,7 @@ public class Factory {
     public static Segment montrealToronto = new Segment(aeroportYUL, aeroportYYZ);
     public static Segment torontoParis = new Segment(aeroportYYZ, aeroportCDG);
     public static Segment parisVancouver = new Segment(aeroportCDG, aeroportYVR);
-    public static Segment torontoVancouver = new Segment(aeroportYYZ, aeroportYVR);
+    public static Segment quebecToronto = new Segment(aeroportYQB, aeroportYYZ);
     public static Segment vancouverOrlando = new Segment(aeroportYVR, aeroportMCO);
     public static Segment orlandoCancun = new Segment(aeroportMCO, aeroportCUN);
     public static Segment cancunParis = new Segment(aeroportCUN, aeroportCDG);
@@ -41,7 +41,7 @@ public class Factory {
         return itineraire;
     }
 
-    public static Itineraire itineraireCourtQcMtl = constructeurItineraire(quebecMontreal);
+    public static Itineraire itineraireLongQcTorontoParis = constructeurItineraire(quebecToronto, torontoParis);
     public static Itineraire itineraireLongQcMtlTorontoParisVancouver =
             constructeurItineraire(quebecMontreal, montrealToronto, torontoParis, parisVancouver);
 }
