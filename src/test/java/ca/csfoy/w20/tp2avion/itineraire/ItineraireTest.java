@@ -77,4 +77,56 @@ class ItineraireTest {
         assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER, itineraire.calculerDistance(), 0.01);
     }
 
+    @Test
+    void etantDonneItineraireLorsqueSansSegmentAlorsInvalide() {
+        Itineraire itineraire = new Itineraire();
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertFalse(estItineraireValide);
+    }
+
+    @Test
+    void etantDonneItineraireLorsqueUnSeulSegmentAlorsValide() {
+        Itineraire itineraire = new Itineraire();
+        itineraire.ajoutSegment(TestFactory.quebecMontreal);
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertTrue(estItineraireValide);
+    }
+
+    @Test
+    void etantDonneItineraireLorsqueDeuxSegmentAvecMemeAeroportDepartAlorsInvalide() {
+        Itineraire itineraire = new Itineraire();
+        itineraire.ajoutSegment(TestFactory.quebecMontreal);
+        itineraire.ajoutSegment(TestFactory.quebecToronto);
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertFalse(estItineraireValide);
+    }
+
+    @Test
+    void etantDonneItineraireLorsqueDeuxSegmentSansLiaisonAlorsInvalide() {
+        Itineraire itineraire = new Itineraire();
+        itineraire.ajoutSegment(TestFactory.quebecMontreal);
+        itineraire.ajoutSegment(TestFactory.torontoParis);
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertFalse(estItineraireValide);
+    }
+
+    @Test
+    void etantDonneItineraireLorsquePlusieursSegmentAvecLiaisonAlorsValide() {
+        Itineraire itineraire = new Itineraire();
+        itineraire.ajoutSegment(TestFactory.quebecToronto);
+        itineraire.ajoutSegment(TestFactory.torontoParis);
+        itineraire.ajoutSegment(TestFactory.parisVancouver);
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertTrue(estItineraireValide);
+    }
 }

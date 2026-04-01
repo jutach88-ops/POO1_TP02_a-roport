@@ -17,8 +17,8 @@ class SegmentTest {
     void etantDonneSegmentLorsqueInstantiationParametreValideAlorsValide() {
         Segment segment = new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYUL);
 
-        assertEquals(AeroportTest.aeroportYQB, segment.getAeroportDepart());
-        assertEquals(AeroportTest.aeroportYUL, segment.getAeroportArrivee());
+        assertEquals(AeroportTest.aeroportYQB, segment.getDepart());
+        assertEquals(AeroportTest.aeroportYUL, segment.getArrive());
     }
 
     @Test

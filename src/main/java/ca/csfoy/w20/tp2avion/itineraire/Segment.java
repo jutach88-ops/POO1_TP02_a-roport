@@ -29,11 +29,11 @@ public class Segment {
         }
     }
 
-    public Aeroport getAeroportDepart() {
+    public Aeroport getDepart() {
         return this.aeroportDepart;
     }
 
-    public Aeroport getAeroportArrivee() {
+    public Aeroport getArrive() {
         return this.aeroportArrivee;
     }
 

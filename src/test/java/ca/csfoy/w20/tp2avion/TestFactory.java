@@ -26,6 +26,7 @@ public class TestFactory {
     // Creation de Segments
 
     public static Segment quebecMontreal = new Segment(aeroportYQB, aeroportYUL);
+    public static Segment quebecToronto = new Segment(aeroportYQB, aeroportYYZ);
     public static Segment montrealToronto = new Segment(aeroportYUL, aeroportYYZ);
     public static Segment torontoParis = new Segment(aeroportYYZ, aeroportCDG);
     public static Segment parisVancouver = new Segment(aeroportCDG, aeroportYVR);

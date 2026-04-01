@@ -37,6 +37,17 @@ public class Itineraire {
         this.distanceEnKm += segment.calculerDistanceAeroport();
     }
 
+    public boolean estItineraireValide() {
+        return estChaineConnectee() && estListeDepartsEgalListeArrives();
+    }
+
+    private boolean estListeDepartsEgalListeArrives() {
+        return getDeparts().size() == getArrivees().size();
+    }
+
+//    private boolean estMemeAeroportPresent() {
+//        return getDeparts().contains()
+//    }
     /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et
      * getArrivees()
      *
@@ -62,12 +73,30 @@ public class Itineraire {
      *
      */
 
+    private boolean estChaineConnectee() {
+        int aeroportDepartManquant = 0;
+        int aeroportArriveManquant = 0;
+
+        for (Aeroport aeroportDepart : getDeparts()) {
+            if (!getArrivees().contains(aeroportDepart)) {
+                aeroportDepartManquant ++;
+            }
+        }
+
+        for (Aeroport aeroportArrive : getArrivees()) {
+            if (!getDeparts().contains(aeroportArrive)) {
+                aeroportArriveManquant ++;
+            }
+        }
+
+        return aeroportDepartManquant == 1 && aeroportArriveManquant == 1;
+    }
 
     /* R8 – Aide à la validation de l'itinéraire
      * Permet de récupérer l'ensemble des départs sans doublons
      * private ArrayList<Aeroport> getDeparts() { ... }
      */
-    /* private ArrayList<Aeroport> getDeparts() {
+    private ArrayList<Aeroport> getDeparts() {
         ArrayList<Aeroport> departs = new ArrayList<>();
         for (Segment segment : this.segments) {
             if (!departs.contains(segment.getDepart())) {
@@ -75,13 +104,13 @@ public class Itineraire {
             }
         }
         return departs;
-    }*/
+    }
 
     /* R8 – Aide à la validation de l'itinéraire
      * Permet de récupérer l'ensemble des arrivées sans doublons
      * private ArrayList<Aeroport> getArrivees() { ... }
      */
-    /* private ArrayList<Aeroport> getArrivees() {
+    private ArrayList<Aeroport> getArrivees() {
         ArrayList<Aeroport> arrives = new ArrayList<>();
         for (Segment segment : this.segments) {
             if (!arrives.contains(segment.getArrive())) {
@@ -89,6 +118,6 @@ public class Itineraire {
             }
         }
         return arrives;
-    }*/
+    }
 
 }
