@@ -82,7 +82,7 @@ class PlanVolTest {
     public void etantDonneCarburantLorsqueInsuffisantAlorsInvalide() {
         Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = this.planVol.isCarburantSuffisant(carburant);
+        boolean estCarburantSuffisant = this.planVol.isVolumeCarburantSecuritaire(carburant);
 
         assertFalse(estCarburantSuffisant);
     }
@@ -91,7 +91,7 @@ class PlanVolTest {
     public void etantDonneCarburantLorsqueSuffisantAlorsValide() {
         Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = this.planVol.isCarburantSuffisant(carburant);
+        boolean estCarburantSuffisant = this.planVol.isVolumeCarburantSecuritaire(carburant);
 
         assertTrue(estCarburantSuffisant);
     }

@@ -41,7 +41,7 @@ class CarburantTest {
     public void etantDonneeCarburantLorsqueInsuffisantPlanDeVolAlorsEstInvalide() {
         Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.estAutonomieCouvreDuree(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
 
         assertFalse(estCarburantSuffisant);
     }
@@ -50,7 +50,7 @@ class CarburantTest {
     public void etantDonneeCarburantLorsqueSuffisantPlanDeVolAlorsEstValide() {
         Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.estAutonomieCouvreDuree(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
 
         assertTrue(estCarburantSuffisant);
     }

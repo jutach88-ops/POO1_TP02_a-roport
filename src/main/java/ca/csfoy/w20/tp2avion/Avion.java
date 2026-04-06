@@ -125,7 +125,7 @@ public class Avion {
     }
 
     private boolean isCarburantSuffisant() {
-        return this.planVol.isCarburantSuffisant(this.carburant);
+        return this.planVol.isVolumeCarburantSecuritaire(this.carburant);
     }
 
     private boolean isLimiteVolumeRespectee() {

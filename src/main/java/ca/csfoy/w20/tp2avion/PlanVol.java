@@ -55,8 +55,8 @@ public class PlanVol {
              à une durée donnée s'il couvre la durée, mais non par rapport à un vol directement). C'est la responsabilité de planDeVol et
      *       non de dire s'il est suffisant pour un vol. C'est plan de vol qui a la responsabilité de dire si en fonction des informations
      *       de vol le vol est prêt et sécuritaire. */
-    public boolean isCarburantSuffisant(Carburant carburant) {
-        return carburant.estAutonomieCouvreDuree(this.getDureePrevue(), this.getReserveCarburantMinimale());
+    public boolean isVolumeCarburantSecuritaire(Carburant carburant) {
+        return carburant.hasAutonomieSecondes(this.getDureePrevue(), this.getReserveCarburantMinimale());
     }
 
     // Tell dont ask
