@@ -2,6 +2,8 @@ package ca.csfoy.w20.tp2avion;
 
 import ca.csfoy.w20.tp2avion.itineraire.Itineraire;
 
+import static java.lang.Math.round;
+
 public class PlanVol {
 
     public static final int SECONDES_PAR_HEURE = 3600;
@@ -31,12 +33,12 @@ public class PlanVol {
     }
 
     public double getDistanceEnKm() {
-        return this.itineraire.calculerDistance();
+        return this.itineraire.getDistance();
     }
 
 
     public long getDureePrevue() {
-        return Math.round(this.itineraire.calculerDistance() / this.vitesseCroisiereKmH * PlanVol.SECONDES_PAR_HEURE);
+        return Math.round(this.itineraire.getDistance() / this.vitesseCroisiereKmH * PlanVol.SECONDES_PAR_HEURE);
     }
 
     public boolean isCargoVivantEnSecurite() {
@@ -56,7 +58,10 @@ public class PlanVol {
      *       non de dire s'il est suffisant pour un vol. C'est plan de vol qui a la responsabilité de dire si en fonction des informations
      *       de vol le vol est prêt et sécuritaire. */
     public boolean isVolumeCarburantSecuritaire(Carburant carburant) {
-        return carburant.hasAutonomieSecondes(this.getDureePrevue(), this.getReserveCarburantMinimale());
+        long dureePrevueAvecReserve = round(
+                this.getDureePrevue() * (1 + this.reserveCarburantMinimale)
+        );
+        return carburant.hasAutonomieSecondes(dureePrevueAvecReserve);
     }
 
     // Tell dont ask

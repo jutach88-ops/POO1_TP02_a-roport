@@ -29,7 +29,7 @@ public class Itineraire {
         return this.nombreDeSegment;
     }
 
-    public double calculerDistance() {
+    public double getDistance() {
         return this.distanceEnKm;
     }
 

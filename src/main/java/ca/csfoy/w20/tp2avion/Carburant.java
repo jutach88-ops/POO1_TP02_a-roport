@@ -33,11 +33,8 @@ public class Carburant {
         return this.volumeEnLitre + " L (" + (round(this.calculerPoidsEnKg() * 100) / 100.0) + " kg)";
     }
 
-    public boolean hasAutonomieSecondes(long dureePrevuPlanVol, double reserveCarburantMinimalePlanVol) {
+    public boolean hasAutonomieSecondes(long dureePrevuPlanVol) {
         double autonomieEnSecondes = this.calculerPoidsEnKg() / Carburant.CONSOMMATION_PAR_HEURE_EN_KG * Carburant.SECONDES_PAR_HEURE;
-        long dureePrevue = round(
-                dureePrevuPlanVol * (1 + reserveCarburantMinimalePlanVol)
-        );
-        return dureePrevue <= autonomieEnSecondes;
+        return dureePrevuPlanVol <= autonomieEnSecondes;
     }
 }
