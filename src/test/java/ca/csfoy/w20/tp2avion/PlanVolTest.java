@@ -23,7 +23,7 @@ class PlanVolTest {
 
     @BeforeEach
     public void setUp() {
-        this.itineraire = TestFactory.itineraireCourtQcMtl;
+        this.itineraire = TestFactory.ITINERAIRE_COURT_QC_MTL;
         this.planVol =
                 new PlanVol(this.itineraire, PlanVolTest.VITESSE_CROISIERE,
                         PlanVolTest.RESERVE_0_POURCENT);
@@ -80,27 +80,27 @@ class PlanVolTest {
 
     @Test
     public void etantDonneCarburantLorsqueSansReserveAlorsInvalide() {
-        Carburant carburant = new Carburant(TestFactory.carburantNecessaireQcMtlNonAjuste);
+        Carburant carburant = new Carburant(TestFactory.LITRES_CARBURANT_NECESSAIRE_QC_MTL_NON_AJUSTE);
 
-        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
+        boolean estPlanVolSecuritaire = TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE.isVolumeCarburantSecuritaire(carburant);
 
         assertFalse(estPlanVolSecuritaire);
     }
 
     @Test
     public void etantDonneCarburantLorsqueAvecReserveAlorsValide() {
-        Carburant carburant = new Carburant(TestFactory.carburantNecessaireQcMtlAjuste);
+        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_NECESSAIRE_QC_MTL_AJUSTE);
 
-        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
+        boolean estPlanVolSecuritaire = TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE.isVolumeCarburantSecuritaire(carburant);
 
         assertTrue(estPlanVolSecuritaire);
     }
 
     @Test
     public void etantDonneCarburantLorsqueAvecReserveMoinUneSecondeAlorsValide() {
-        Carburant carburant = new Carburant(TestFactory.carburantQcMtlMoinsUneSeconde);
+        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
 
-        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
+        boolean estPlanVolSecuritaire = TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE.isVolumeCarburantSecuritaire(carburant);
 
         assertFalse(estPlanVolSecuritaire);
     }

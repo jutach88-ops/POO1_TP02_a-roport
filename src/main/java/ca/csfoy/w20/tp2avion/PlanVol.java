@@ -29,7 +29,7 @@ public class PlanVol {
     }
 
     public boolean isValide() {
-        return true;
+        return this.itineraire.estItineraireValide();
     }
 
     public double getDistanceEnKm() {

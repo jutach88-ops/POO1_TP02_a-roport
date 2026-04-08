@@ -115,7 +115,8 @@ public class Avion {
                 && this.isVolumeBagagesSouteConforme()
                 && this.isVolumeBagagesCabineConforme()
                 && this.isLimitePoidsRespectee()
-                && this.isLimiteVolumeRespectee();
+                && this.isLimiteVolumeRespectee()
+                && this.planVol.isValide();
     }
 
     /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. Voir plus
@@ -164,6 +165,10 @@ public class Avion {
                 + this.getPoidsBagagesEnSoute()
                 + this.carburant.calculerPoidsEnKg();
     }
+
+    // ================================
+    //        Section Affichage
+    // ================================
 
     public double getCapaciteChargementEnKg() {
         return this.capaciteChargementEnKg;

@@ -40,7 +40,7 @@ class CarburantTest {
     public void etantDonneeCarburantLorsqueInsuffisantAlorsEstInvalide() {
         Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.DUREE_SECONDE_PREVU_QC_MTL);
 
         assertFalse(estCarburantSuffisant);
     }
@@ -49,25 +49,25 @@ class CarburantTest {
     public void etantDonneeCarburantLorsqueSuffisantAlorsEstValide() {
         Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.DUREE_SECONDE_PREVU_QC_MTL);
 
         assertTrue(estCarburantSuffisant);
     }
 
     @Test
     public void etantDonneeCarburantLorsqueExactementSuffisantAlorsEstValide() {
-        Carburant carburant = new Carburant(TestFactory.carburantExactementNecessaireQcMtl);
+        Carburant carburant = new Carburant(TestFactory.CARBURANT_EXACTEMENT_NECESSAIRE_QC_MTL);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.DUREE_SECONDE_PREVU_QC_MTL);
 
         assertTrue(estCarburantSuffisant);
     }
 
     @Test
     public void etantDonneeCarburantLorsqueCarburantPrevuMoinUneSecondeAlorsEstInvalide() {
-        Carburant carburant = new Carburant(TestFactory.carburantMoinsUneSecondeQcMtl);
+        Carburant carburant = new Carburant(TestFactory.CARBURANT_MOINS_UNE_SECONDE_QC_MTL);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.DUREE_SECONDE_PREVU_QC_MTL);
 
         assertFalse(estCarburantSuffisant);
     }

@@ -10,9 +10,6 @@ public class Itineraire {
     private int nombreDeSegment = 0;
 
     public void ajoutSegment(Segment segment) {
-        if (segments.contains(segment)) {
-            throw new IllegalArgumentException("Un itinéraire ne peut pas avoir deux fois le même segment.");
-        }
         validerSegment(segment);
         this.segments.add(segment);
         this.calculerLongueurItineraireKm(segment);
@@ -22,6 +19,8 @@ public class Itineraire {
     public void validerSegment(Segment segment) {
         if (segment == null) {
             throw new IllegalArgumentException("Le segment est invalide, veuillez entrer un segment valide.");
+        } else if (this.segments.contains(segment)) {
+            throw new IllegalArgumentException("Un itinéraire ne peut pas avoir deux fois le même segment.");
         }
     }
 

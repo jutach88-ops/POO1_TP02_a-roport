@@ -64,14 +64,14 @@ class ItineraireTest {
 
     @Test
     void etantDonneItineraireLosrqueUnSeulSegmentAlorsValeurAttendue() {
-        Itineraire itineraire = TestFactory.itineraireCourtQcMtl;
+        Itineraire itineraire = TestFactory.ITINERAIRE_COURT_QC_MTL;
 
         assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL, itineraire.getDistance(), 0.01);
     }
 
     @Test
     void etantDonneItineraireLosrqueSegmentPlusieursSegmentsAlorsValeurAttendue() {
-        Itineraire itineraire = TestFactory.itineraireLongQcMtlTorontoParisVancouver;
+        Itineraire itineraire = TestFactory.ITINERAIRE_LONG_QC_MTL_TORONTO_PARIS_VANCOUVER;
 
         assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER, itineraire.getDistance(), 0.01);
     }
@@ -88,7 +88,7 @@ class ItineraireTest {
     @Test
     void etantDonneItineraireLorsqueUnSeulSegmentAlorsValide() {
         Itineraire itineraire = new Itineraire();
-        itineraire.ajoutSegment(TestFactory.quebecMontreal);
+        itineraire.ajoutSegment(TestFactory.QUEBEC_MONTREAL);
 
         boolean estItineraireValide = itineraire.estItineraireValide();
 
@@ -98,8 +98,8 @@ class ItineraireTest {
     @Test
     void etantDonneItineraireLorsqueDeuxSegmentAvecMemeAeroportDepartAlorsInvalide() {
         Itineraire itineraire = new Itineraire();
-        itineraire.ajoutSegment(TestFactory.quebecMontreal);
-        itineraire.ajoutSegment(TestFactory.quebecToronto);
+        itineraire.ajoutSegment(TestFactory.QUEBEC_MONTREAL);
+        itineraire.ajoutSegment(TestFactory.QUEBEC_TORONTO);
 
         boolean estItineraireValide = itineraire.estItineraireValide();
 
@@ -109,8 +109,8 @@ class ItineraireTest {
     @Test
     void etantDonneItineraireLorsqueDeuxSegmentSansLiaisonAlorsInvalide() {
         Itineraire itineraire = new Itineraire();
-        itineraire.ajoutSegment(TestFactory.quebecMontreal);
-        itineraire.ajoutSegment(TestFactory.torontoParis);
+        itineraire.ajoutSegment(TestFactory.QUEBEC_MONTREAL);
+        itineraire.ajoutSegment(TestFactory.TORONTO_PARIS);
 
         boolean estItineraireValide = itineraire.estItineraireValide();
 
@@ -120,9 +120,9 @@ class ItineraireTest {
     @Test
     void etantDonneItineraireLorsquePlusieursSegmentAvecLiaisonAlorsValide() {
         Itineraire itineraire = new Itineraire();
-        itineraire.ajoutSegment(TestFactory.quebecToronto);
-        itineraire.ajoutSegment(TestFactory.torontoParis);
-        itineraire.ajoutSegment(TestFactory.parisVancouver);
+        itineraire.ajoutSegment(TestFactory.QUEBEC_TORONTO);
+        itineraire.ajoutSegment(TestFactory.TORONTO_PARIS);
+        itineraire.ajoutSegment(TestFactory.PARIS_VANCOUVER);
 
         boolean estItineraireValide = itineraire.estItineraireValide();
 

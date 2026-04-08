@@ -15,30 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AvionTest {
 
-    public static final double DISTANCE_QUEBEC_MONTREAL = 232.93;
-    public static final double VOLUME_CARBURANT_EN_LITRE = 500.0;
-    public static final int DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER = 10_000;
-    private static final int VITESSE_CROISIERE = 900;
-    private static final double RESERVE_0_POURCENT = 0.0;
+    // Caractéristiques d'avion
     private static final double CAPACITE_POIDS_KG = 50_000.0;
     private static final double CAPACITE_SOUTE_LITRES = 10_000.0;
-    private static final long DUREE_QUEBEC_MONTREAL = AvionTest.dureeQuebecMontreal();
+
+    // Caractéristique de plan de vol
+    private static final int VITESSE_CROISIERE = 900;
+    private static final double RESERVE_0_POURCENT = 0.0;
+
+    // Caractéristique d'itinéraire
+    private static final long DUREE_QUEBEC_MONTREAL = TestFactory.DUREE_SECONDE_PREVU_QC_MTL;
+
+    // Caractéristique de Carburant
+    public static final double VOLUME_CARBURANT_EN_LITRE = 500.0;
     private static final double VOLUME_CARBURANT_SUFFISANT = AvionTest.volumeCarburant(AvionTest.DUREE_QUEBEC_MONTREAL);
-    private static final double VOLUME_SECURITAIRE =
-            Math.ceil(
-                    AvionTest.DUREE_QUEBEC_MONTREAL
-                            * Carburant.CONSOMMATION_PAR_HEURE_EN_KG
-                            / Carburant.MASSE_VOLUMIQUE_KEROSENE_15_C
-                            / Carburant.SECONDES_PAR_HEURE
-            );
+
     private Avion avion;
     private PlanVol planVolCourt;
     private PlanVol planVolLong;
-
-    private static long dureeQuebecMontreal() {
-        return round(
-                AvionTest.DISTANCE_QUEBEC_MONTREAL / AvionTest.VITESSE_CROISIERE * PlanVol.SECONDES_PAR_HEURE);
-    }
 
     private static double volumeCarburant(long dureeVolLong) {
         return Math.ceil(
@@ -48,17 +42,15 @@ class AvionTest {
                         / Carburant.SECONDES_PAR_HEURE);
     }
 
-
-
     @BeforeEach
     public void setUp() {
         this.planVolCourt = new PlanVol(
-                TestFactory.itineraireCourtQcMtl, AvionTest.VITESSE_CROISIERE,
+                TestFactory.ITINERAIRE_COURT_QC_MTL, AvionTest.VITESSE_CROISIERE,
                 AvionTest.RESERVE_0_POURCENT);
         this.planVolLong = new PlanVol(
-                TestFactory.itineraireLongQcMtlTorontoParisVancouver, AvionTest.VITESSE_CROISIERE,
+                TestFactory.ITINERAIRE_LONG_QC_MTL_TORONTO_PARIS_VANCOUVER, AvionTest.VITESSE_CROISIERE,
                 AvionTest.RESERVE_0_POURCENT);
-        this.avion = new Avion(this.planVolCourt, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
+        this.avion = new Avion(planVolCourt, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
         this.avion.remplir(new Carburant(AvionTest.VOLUME_CARBURANT_SUFFISANT));
     }
 
@@ -135,38 +127,32 @@ class AvionTest {
     }
 
     @Test
-    public void etantDonneUnCarburantSuffisantSansReserveAlorsLAvionEstAutoriseeADecoller() {
-        Carburant carburantSuffisant = new Carburant(AvionTest.VOLUME_SECURITAIRE);
+    public void etantDonneAvionLorsqueCarburantSuffisantSansReserveAlorsAvionNonAutoriseeADecoller() {
+        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
+                AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburantSuffisant = new Carburant(TestFactory.LITRES_CARBURANT_NECESSAIRE_QC_MTL_NON_AJUSTE);
 
-        this.avion.remplir(carburantSuffisant);
+        avion.remplir(carburantSuffisant);
 
-        assertTrue(this.avion.autoriseADecoller());
+        assertFalse(avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneUnCarburantInsuffisantSansReserveAlorsLAvionNestPasAutoriseeADecoller() {
-        Carburant carburantInsuffisant = new Carburant(AvionTest.VOLUME_SECURITAIRE - 1);
+    public void etantDonneAvionLorsqueCarburantInsuffisantSansReserveAlorsLAvionNestPasAutoriseeADecoller() {
+        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
+                AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburantInsuffisant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
 
-        this.avion.remplir(carburantInsuffisant);
+        avion.remplir(carburantInsuffisant);
 
-        assertFalse(this.avion.autoriseADecoller());
+        assertFalse(avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneUnAvionBienConfigureAlorsAutoriseADecoller() {
-        assertTrue(this.avion.autoriseADecoller());
-    }
+    public void etantDonneAvionLorsqueDepassantLaLimiteDePoidsTotaleAlorsNonAutoriseADecoller() {
+        int nbPassagersTropLourd =
+                (int) Math.ceil(AvionTest.CAPACITE_POIDS_KG / Avion.POIDS_MOYEN_PASSAGER_EN_KG) + 1;
 
-    @Test
-    public void etantDonneUnAvionAvecCarburantInsuffisantAlorsNonAutoriseADecoller() {
-        this.avion.remplir(new Carburant(AvionTest.VOLUME_CARBURANT_SUFFISANT - 1));
-
-        assertFalse(this.avion.autoriseADecoller());
-    }
-
-    @Test
-    public void etantDonneUnAvionDepassantLaLimiteDePoidsTotaleAlorsNonAutoriseADecoller() {
-        int nbPassagersTropLourd = (int) Math.ceil(AvionTest.CAPACITE_POIDS_KG / Avion.POIDS_MOYEN_PASSAGER_EN_KG) + 1;
         this.avion.ajouterPassagers(nbPassagersTropLourd);
 
         assertFalse(this.avion.autoriseADecoller());
@@ -178,8 +164,6 @@ class AvionTest {
 
         assertFalse(this.avion.autoriseADecoller());
     }
-
-
 
     @Test
     public void etantDonneUnAvionDepassantLaCapaciteTotaleEnSouteAlorsNonAutoriseADecoller() {
@@ -238,30 +222,44 @@ class AvionTest {
     }
 
     @Test
-    public void etantDonneUnAvionAvecBagageCabineDepassantLaLimiteDeVolumeIndividuelleAlorsNonAutoriseADecoller() {
+    public void etantDonneAvionLorsqueBagageCabineDepasseLimiteDeVolumeIndividuelleAlorsNonAutoriseADecoller() {
         this.avion.ajouterBagageEnCabine(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_EN_CABINE + 1));
 
         assertFalse(this.avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneUnAvionAvecBagageCabineExactementALaLimiteDeVolumeIndividuelleAlorsAutoriseADecoller() {
+    public void etantDonneAvionLorsqueBagageCabineExactementLimiteVolumeIndividuelleAlorsAutoriseADecoller() {
         this.avion.ajouterBagageEnCabine(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_EN_CABINE));
 
         assertTrue(this.avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneUnAvionAvecBagageSouteDepassantLaLimiteDeVolumeIndividuelleAlorsNonAutoriseADecoller() {
+    public void etantDonneAvionLorsqueBagageSouteDepasseLimiteVolumeIndividuelleAlorsNonAutoriseADecoller() {
         this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE + 1));
 
         assertFalse(this.avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneUnAvionAvecBagageSouteExactementALaLimiteDeVolumeIndividuelleAlorsAutoriseADecoller() {
+    public void etantDonneAvionLorsqueBagageSouteExactementLimiteVolumeIndividuelleAlorsAutoriseADecoller() {
         this.avion.ajouterBagageEnSoute(new Bagage(1.0, Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE));
 
         assertTrue(this.avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueItineraireInvalideAlorsNonAutoriseeADecoller() {
+        Itineraire itineraireInvalide =
+                TestFactory.constructeurItineraire(TestFactory.QUEBEC_MONTREAL, TestFactory.QUEBEC_TORONTO);
+        PlanVol planDeVolInvalide = new PlanVol(itineraireInvalide, TestFactory.VITESSE_DE_CROISIERE,
+                TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
+        Avion avion = new Avion(planDeVolInvalide, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburant = new Carburant(AvionTest.VOLUME_CARBURANT_EN_LITRE);
+
+        avion.remplir(carburant);
+
+        assertFalse(avion.autoriseADecoller());
     }
 }
