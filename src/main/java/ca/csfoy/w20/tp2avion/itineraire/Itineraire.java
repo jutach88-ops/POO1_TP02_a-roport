@@ -44,9 +44,6 @@ public class Itineraire {
         return getDeparts().size() == getArrivees().size();
     }
 
-//    private boolean estMemeAeroportPresent() {
-//        return getDeparts().contains()
-//    }
     /* R8 – Implémenter la validation en vous servant du pseudo-code ci-dessous et les 2 méthodes fournies (getDeparts et
      * getArrivees()
      *
@@ -78,13 +75,13 @@ public class Itineraire {
 
         for (Aeroport aeroportDepart : getDeparts()) {
             if (!getArrivees().contains(aeroportDepart)) {
-                aeroportDepartManquant ++;
+                aeroportDepartManquant++;
             }
         }
 
         for (Aeroport aeroportArrive : getArrivees()) {
             if (!getDeparts().contains(aeroportArrive)) {
-                aeroportArriveManquant ++;
+                aeroportArriveManquant++;
             }
         }
 

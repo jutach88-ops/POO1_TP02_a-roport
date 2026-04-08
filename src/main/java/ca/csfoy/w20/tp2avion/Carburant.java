@@ -34,7 +34,8 @@ public class Carburant {
     }
 
     public boolean hasAutonomieSecondes(long dureePrevuPlanVol) {
-        double autonomieEnSecondes = round(this.calculerPoidsEnKg() / Carburant.CONSOMMATION_PAR_HEURE_EN_KG * Carburant.SECONDES_PAR_HEURE);
+        double autonomieEnSecondes =
+                round(this.calculerPoidsEnKg() / Carburant.CONSOMMATION_PAR_HEURE_EN_KG * Carburant.SECONDES_PAR_HEURE);
         return dureePrevuPlanVol <= autonomieEnSecondes;
     }
 }

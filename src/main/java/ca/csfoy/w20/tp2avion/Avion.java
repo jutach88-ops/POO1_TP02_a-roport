@@ -12,8 +12,6 @@ public class Avion {
     public static final double VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE = 100;
     public static final double VOLUME_MAXIMAL_EN_LITRES_EN_CABINE = 30;
 
-    public static final int SECONDES_PAR_HEURE = 3600;
-
     private final PlanVol planVol;
     private final double capaciteChargementEnKg;
     private final double capaciteChargementSouteEnLitres;
@@ -120,7 +118,7 @@ public class Avion {
     }
 
     /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. Voir plus
-    * haut la fonction ajouterAnimalEnSoute(), c'est elle qui informe PlanVol de présence de cargo vivant. */
+     * haut la fonction ajouterAnimalEnSoute(), c'est elle qui informe PlanVol de présence de cargo vivant. */
     private boolean isCargoVivantEnSecurite() {
         return this.planVol.isCargoVivantEnSecurite();
     }
@@ -134,7 +132,7 @@ public class Avion {
     }
 
     /*  R5 - Régler TDA : L'expert de l'information concernant les caractéristiques de bagages c'est Bagage
-    *                     Donc, il faut que bagage dise lui-même s'il est conforme et non avion*/
+     *                     Donc, il faut que bagage dise lui-même s'il est conforme et non avion*/
     private boolean isVolumeBagagesSouteConforme() {
         for (Bagage bagage : this.bagagesEnSoute) {
             if (!bagage.estBagageConforme(Avion.VOLUME_MAXIMAL_EN_LITRES_ENREGISTRE)) {

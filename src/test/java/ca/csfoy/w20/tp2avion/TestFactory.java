@@ -61,6 +61,10 @@ public class TestFactory {
             PLAN_VOL_QC_MTL_SANS_RESERVE =
             new PlanVol(ITINERAIRE_COURT_QC_MTL, TestFactory.VITESSE_DE_CROISIERE,
                     TestFactory.SANS_RESERVE_DE_CARBURANT);
+    public static final PlanVol
+            PLAN_VOL_QC_MTL_TOR_PA_VAN_AVEC_RESERVE =
+            new PlanVol(ITINERAIRE_LONG_QC_MTL_TORONTO_PARIS_VANCOUVER, TestFactory.VITESSE_DE_CROISIERE,
+                    TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
 
     // ========================================
     //      Pour tests PlanVol et Tests Avion
@@ -81,6 +85,7 @@ public class TestFactory {
     // ===========================================
     public static final long DUREE_SECONDE_PREVU_QC_MTL = dureePrevuEnSeconde(PLAN_VOL_QC_MTL);
     public static final long DUREE_PREVU_QC_MTL_MOIN_UNE_SECONDE = dureePrevuEnSeconde(PLAN_VOL_QC_MTL) - 1;
+    public static final long DUREE_SECONDE_PREVU_QC_MTL_TOR_PA_VAN = dureePrevuEnSeconde(PLAN_VOL_QC_MTL_TOR_PA_VAN_AVEC_RESERVE);
 
     //====================================================================
     // Calculer autonomie exacte en carburant d'un itinéraire
@@ -114,5 +119,8 @@ public class TestFactory {
     public static final double LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE =
             calculerAutonomieExacteCarburantItineraire(DUREE_PREVU_QC_MTL_MOIN_UNE_SECONDE,
                     PLAN_VOL_QC_MTL_AVEC_RESERVE);
+    public static final double LITRE_CARBURANT_QC_MTL_TOR_PA_VAN =
+            calculerAutonomieExacteCarburantItineraire(DUREE_SECONDE_PREVU_QC_MTL_TOR_PA_VAN,
+                    PLAN_VOL_QC_MTL_TOR_PA_VAN_AVEC_RESERVE);
 
 }

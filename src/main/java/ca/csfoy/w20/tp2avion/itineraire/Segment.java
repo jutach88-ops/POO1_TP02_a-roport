@@ -6,7 +6,6 @@ public class Segment {
 
     private final Aeroport aeroportDepart;
     private final Aeroport aeroportArrivee;
-    //    private final float distanceEnKm;
 
     public Segment(Aeroport aeroportDepart, Aeroport aeroportArrivee) {
         this.validationCodeAeroport(aeroportDepart);
@@ -38,7 +37,7 @@ public class Segment {
     }
 
     public double calculerDistanceAeroport() {
-        return  this.aeroportDepart.getDistance(this.aeroportArrivee);
+        return this.aeroportDepart.getDistance(this.aeroportArrivee);
     }
 
     @Override
@@ -58,9 +57,4 @@ public class Segment {
     public int hashCode() {
         return Objects.hash(aeroportDepart, aeroportArrivee);
     }
-
-    //    @Override
-    //    public String toString() {
-    //        return this.nom + "[" + this.code + "]" + this.coordonnee;
-    //    }
 }

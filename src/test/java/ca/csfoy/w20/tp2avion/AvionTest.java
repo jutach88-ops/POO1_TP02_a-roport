@@ -127,28 +127,6 @@ class AvionTest {
     }
 
     @Test
-    public void etantDonneAvionLorsqueCarburantSuffisantSansReserveAlorsAvionNonAutoriseeADecoller() {
-        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
-                AvionTest.CAPACITE_SOUTE_LITRES);
-        Carburant carburantSuffisant = new Carburant(TestFactory.LITRES_CARBURANT_NECESSAIRE_QC_MTL_NON_AJUSTE);
-
-        avion.remplir(carburantSuffisant);
-
-        assertFalse(avion.autoriseADecoller());
-    }
-
-    @Test
-    public void etantDonneAvionLorsqueCarburantInsuffisantSansReserveAlorsLAvionNestPasAutoriseeADecoller() {
-        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
-                AvionTest.CAPACITE_SOUTE_LITRES);
-        Carburant carburantInsuffisant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
-
-        avion.remplir(carburantInsuffisant);
-
-        assertFalse(avion.autoriseADecoller());
-    }
-
-    @Test
     public void etantDonneAvionLorsqueDepassantLaLimiteDePoidsTotaleAlorsNonAutoriseADecoller() {
         int nbPassagersTropLourd =
                 (int) Math.ceil(AvionTest.CAPACITE_POIDS_KG / Avion.POIDS_MOYEN_PASSAGER_EN_KG) + 1;
@@ -261,5 +239,52 @@ class AvionTest {
         avion.remplir(carburant);
 
         assertFalse(avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueItineraireValideAlorsAutoriseeADecoller() {
+        Itineraire itineraireInvalide =
+                TestFactory.constructeurItineraire(TestFactory.QUEBEC_MONTREAL, TestFactory.MONTREAL_TORONTO, TestFactory.TORONTO_PARIS, TestFactory.PARIS_VANCOUVER);
+        PlanVol planDeVolInvalide = new PlanVol(itineraireInvalide, TestFactory.VITESSE_DE_CROISIERE,
+                TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
+        Avion avion = new Avion(planDeVolInvalide, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_TOR_PA_VAN);
+
+        avion.remplir(carburant);
+
+        assertFalse(avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueCarburantSuffisantSansReserveAlorsAvionNonAutoriseeADecoller() {
+        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
+                AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburantSuffisant = new Carburant(TestFactory.LITRES_CARBURANT_NECESSAIRE_QC_MTL_NON_AJUSTE);
+
+        avion.remplir(carburantSuffisant);
+
+        assertFalse(avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueCarburantInsuffisantSansReserveAlorsLAvionNestPasAutoriseeADecoller() {
+        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
+                AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburantInsuffisant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
+
+        avion.remplir(carburantInsuffisant);
+
+        assertFalse(avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueCarburantSuffisantAvecReserveAlorsAvionAutoriseeADecoller() {
+        Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
+                AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburantSuffisant = new Carburant(TestFactory.LITRE_CARBURANT_NECESSAIRE_QC_MTL_AJUSTE);
+
+        avion.remplir(carburantSuffisant);
+
+        assertTrue(avion.autoriseADecoller());
     }
 }

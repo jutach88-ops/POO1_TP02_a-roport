@@ -36,7 +36,6 @@ public class PlanVol {
         return this.itineraire.getDistance();
     }
 
-
     public long getDureePrevue() {
         return Math.round(this.itineraire.getDistance() / this.vitesseCroisiereKmH * PlanVol.SECONDES_PAR_HEURE);
     }
