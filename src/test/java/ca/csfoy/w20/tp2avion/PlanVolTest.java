@@ -79,20 +79,29 @@ class PlanVolTest {
     }
 
     @Test
-    public void etantDonneCarburantLorsqueInsuffisantAlorsInvalide() {
-        Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
+    public void etantDonneCarburantLorsqueSansReserveAlorsInvalide() {
+        Carburant carburant = new Carburant(TestFactory.carburantNecessaireQcMtlNonAjuste);
 
-        boolean estCarburantSuffisant = this.planVol.isVolumeCarburantSecuritaire(carburant);
+        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
 
-        assertFalse(estCarburantSuffisant);
+        assertFalse(estPlanVolSecuritaire);
     }
 
     @Test
-    public void etantDonneCarburantLorsqueSuffisantAlorsValide() {
-        Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
+    public void etantDonneCarburantLorsqueAvecReserveAlorsValide() {
+        Carburant carburant = new Carburant(TestFactory.carburantNecessaireQcMtlAjuste);
 
-        boolean estCarburantSuffisant = this.planVol.isVolumeCarburantSecuritaire(carburant);
+        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
 
-        assertTrue(estCarburantSuffisant);
+        assertTrue(estPlanVolSecuritaire);
+    }
+
+    @Test
+    public void etantDonneCarburantLorsqueAvecReserveMoinUneSecondeAlorsValide() {
+        Carburant carburant = new Carburant(TestFactory.carburantQcMtlMoinsUneSeconde);
+
+        boolean estPlanVolSecuritaire = TestFactory.planVolQcMtlAvecReserve.isVolumeCarburantSecuritaire(carburant);
+
+        assertFalse(estPlanVolSecuritaire);
     }
 }

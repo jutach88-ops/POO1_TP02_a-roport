@@ -1,0 +1,21 @@
+participant "Avion" as ca.csfoy.w20.tp2avion.Avion
+participant "PlanVol" as ca.csfoy.w20.tp2avion.PlanVol
+participant "Itineraire" as ca.csfoy.w20.tp2avion.itineraire.Itineraire
+participant "Carburant" as ca.csfoy.w20.tp2avion.Carburant
+
+autoactivation
+autonumber
+messagestyle <wordwrap:50>
+
+ca.csfoy.w20.tp2avion.Avion->ca.csfoy.w20.tp2avion.PlanVol:isCarburantSuffisant(this.carburant)
+ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.PlanVol:getDureePrevue()
+ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.itineraire.Itineraire:calculerDistance()
+ca.csfoy.w20.tp2avion.PlanVol<--ca.csfoy.w20.tp2avion.itineraire.Itineraire:this.distanceEnKm : double
+ca.csfoy.w20.tp2avion.PlanVol<--ca.csfoy.w20.tp2avion.PlanVol:Math.round(this.itineraire.calculerDistance() / this.vitesseCroisiereKmH * PlanVol.SECONDES_PAR_HEURE) : long
+ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.PlanVol:getReserveCarburantMinimale()
+ca.csfoy.w20.tp2avion.PlanVol<--ca.csfoy.w20.tp2avion.PlanVol:this.reserveCarburantMinimale : double
+ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.Carburant:estAutonomieCouvreDuree(this.getDureePrevue(), this.getReserveCarburantMinima...)
+ca.csfoy.w20.tp2avion.Carburant->ca.csfoy.w20.tp2avion.Carburant:calculerPoidsEnKg()
+ca.csfoy.w20.tp2avion.Carburant<--ca.csfoy.w20.tp2avion.Carburant:Carburant.MASSE_VOLUMIQUE_KEROSENE_15_C * this.volumeEnLitre : double
+ca.csfoy.w20.tp2avion.PlanVol<--ca.csfoy.w20.tp2avion.Carburant:dureePrevue <= autonomieEnSecondes : boolean
+ca.csfoy.w20.tp2avion.Avion<--ca.csfoy.w20.tp2avion.PlanVol:carburant.estAutonomieCouvreDuree(this.getDureePrevue(), this.getReserveCarburantMinimale()) : boolean

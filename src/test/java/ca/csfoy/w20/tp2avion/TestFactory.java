@@ -48,4 +48,54 @@ public class TestFactory {
 
     public static Itineraire itineraireCourtQcMtl = constructeurItineraire(quebecMontreal);
     public static Itineraire itineraireLongQcMtlTorontoParisVancouver = constructeurItineraire(quebecMontreal, montrealToronto, torontoParis, parisVancouver);
+
+    // Création de plan de vol
+    public static final int VITESSE_DE_CROISIERE = 800;
+    public static final double RESERVE_DE_CARBURANT_MINIMAL = 0.18;
+    public static final double SANS_RESERVE_DE_CARBURANT = 0.0;
+
+    public static PlanVol
+            planVolQcMtl = new PlanVol(itineraireCourtQcMtl, TestFactory.VITESSE_DE_CROISIERE, TestFactory.SANS_RESERVE_DE_CARBURANT);
+    public static PlanVol
+            planVolQcMtlAvecReserve = new PlanVol(itineraireCourtQcMtl, TestFactory.VITESSE_DE_CROISIERE, TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
+    public static PlanVol
+            planVolQcMtlSansReserve = new PlanVol(itineraireCourtQcMtl, TestFactory.VITESSE_DE_CROISIERE, TestFactory.SANS_RESERVE_DE_CARBURANT);
+
+    // Creation de durée prévue en seconde pour un itinéraire donné.
+    public static long dureePrevuEnSeconde(PlanVol planVol) {
+        return planVol.getDureePrevue();
+    }
+
+    // =============================
+    //      Pour test Carburant
+    // =============================
+    public static long dureeSecondePrevuQcMtl = dureePrevuEnSeconde(planVolQcMtl);
+    public static long dureePrevuQcMtlMoinUneSeconde = dureePrevuEnSeconde(planVolQcMtl) - 1;
+
+    // Calculer autonomie exacte en carburant d'un itinéraire
+    public static final double MASSE_VOLUMIQUE_KEROSENE_15_C = 0.804;
+    public static final double CONSOMMATION_PAR_HEURE_EN_KG = 2400;
+    public static final int SECONDES_PAR_HEURE = 3600;
+
+
+    public static double calculerAutonomieExacteCarburantItineraire(long dureeSecondeItineraire, PlanVol planVol) {
+        return Math.round(
+                ((dureeSecondeItineraire * TestFactory.CONSOMMATION_PAR_HEURE_EN_KG)
+                        /TestFactory.SECONDES_PAR_HEURE)
+                        /TestFactory.MASSE_VOLUMIQUE_KEROSENE_15_C) * (1 + planVol.getReserveCarburantMinimale());
+    }
+
+    // =============================
+    //      Pour test Carburant
+    // =============================
+    public static double carburantExactementNecessaireQcMtl = calculerAutonomieExacteCarburantItineraire(dureeSecondePrevuQcMtl, planVolQcMtl);
+    public static double carburantMoinsUneSecondeQcMtl = calculerAutonomieExacteCarburantItineraire(dureePrevuQcMtlMoinUneSeconde, planVolQcMtl);
+
+    // =============================
+    //      Pour test PlanVol
+    // =============================
+    public static double carburantNecessaireQcMtlNonAjuste = calculerAutonomieExacteCarburantItineraire(dureeSecondePrevuQcMtl, planVolQcMtlSansReserve);
+    public static double carburantNecessaireQcMtlAjuste = calculerAutonomieExacteCarburantItineraire(dureeSecondePrevuQcMtl, planVolQcMtlAvecReserve);
+    public static double carburantQcMtlMoinsUneSeconde = calculerAutonomieExacteCarburantItineraire(dureePrevuQcMtlMoinUneSeconde, planVolQcMtlAvecReserve);
+
 }

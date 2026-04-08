@@ -11,8 +11,7 @@ class CarburantTest {
 
     public static final double VOLUME_EN_LITRES = 1000.0;
     public static final double FAIBLE_VOLUME_EN_LITRES = 15.0;
-    public static final double MASSE_VOLUMIQUE_1000_LITRES =
-            CarburantTest.VOLUME_EN_LITRES * Carburant.MASSE_VOLUMIQUE_KEROSENE_15_C;
+    public static final double MASSE_VOLUMIQUE_1000_LITRES = CarburantTest.VOLUME_EN_LITRES * Carburant.MASSE_VOLUMIQUE_KEROSENE_15_C;
     public static final double VOLUME_INVALIDE = Carburant.SEUIL_VOLUME_EN_LITRES - 0.01;
 
     @Test
@@ -38,21 +37,39 @@ class CarburantTest {
     }
 
     @Test
-    public void etantDonneeCarburantLorsqueInsuffisantPlanDeVolAlorsEstInvalide() {
+    public void etantDonneeCarburantLorsqueInsuffisantAlorsEstInvalide() {
         Carburant carburant = new Carburant(CarburantTest.FAIBLE_VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
 
         assertFalse(estCarburantSuffisant);
     }
 
     @Test
-    public void etantDonneeCarburantLorsqueSuffisantPlanDeVolAlorsEstValide() {
+    public void etantDonneeCarburantLorsqueSuffisantAlorsEstValide() {
         Carburant carburant = new Carburant(CarburantTest.VOLUME_EN_LITRES);
 
-        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(PlanVolTest.DUREE_QUEBEC_MONTREAL, PlanVolTest.RESERVE_0_POURCENT);
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
 
         assertTrue(estCarburantSuffisant);
+    }
+
+    @Test
+    public void etantDonneeCarburantLorsqueExactementSuffisantAlorsEstValide() {
+        Carburant carburant = new Carburant(TestFactory.carburantExactementNecessaireQcMtl);
+
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+
+        assertTrue(estCarburantSuffisant);
+    }
+
+    @Test
+    public void etantDonneeCarburantLorsqueCarburantPrevuMoinUneSecondeAlorsEstInvalide() {
+        Carburant carburant = new Carburant(TestFactory.carburantMoinsUneSecondeQcMtl);
+
+        boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.dureeSecondePrevuQcMtl);
+
+        assertFalse(estCarburantSuffisant);
     }
 
 }

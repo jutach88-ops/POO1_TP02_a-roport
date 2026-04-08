@@ -7,6 +7,7 @@ autoactivation
 autonumber
 messagestyle <wordwrap:50>
 
+entryspacing 1.2
 ca.csfoy.w20.tp2avion.Avion->ca.csfoy.w20.tp2avion.PlanVol:isVolumeCarburantSecuritaire(this.carburant)
 ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.PlanVol:getDureePrevue()
 ca.csfoy.w20.tp2avion.PlanVol->ca.csfoy.w20.tp2avion.itineraire.Itineraire:getDistance()
