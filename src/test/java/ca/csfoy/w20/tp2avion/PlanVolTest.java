@@ -30,17 +30,17 @@ class PlanVolTest {
     }
 
     @Test
-    public void etantDonneUnPlanVolLorsDeLObtenirDistanceAlorsRetourneLaDistanceDeLItineraire() {
+    public void etantDonnePlanVolLorsqueObtenirDistanceAlorsRetourneDistanceItineraire() {
         assertEquals(PlanVolTest.DISTANCE_QUEBEC_MONTREAL, this.planVol.getDistanceEnKm(), 0.01);
     }
 
     @Test
-    public void etantDonneUnItineraireValideAlorsLePlanVolEstValide() {
+    public void etantDonnePlanDeVolLorsqueItineraireValideAlorsPlanVolValide() {
         assertTrue(this.planVol.isValide());
     }
 
     @Test
-    public void etantDonneUnPlanVolAlorsLaDureePrevueEstCalculeeSelonDistanceEtVitesse() {
+    public void etantDonnePlanVolAlorsLaDureePrevueEstCalculeeSelonDistanceEtVitesse() {
         assertEquals(PlanVolTest.DUREE_QUEBEC_MONTREAL, this.planVol.getDureePrevue());
     }
 
@@ -97,7 +97,7 @@ class PlanVolTest {
     }
 
     @Test
-    public void etantDonneCarburantLorsqueAvecReserveMoinUneSecondeAlorsValide() {
+    public void etantDonneCarburantLorsqueAvecReserveMoinUneSecondeAlorsInvalide() {
         Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
 
         boolean estPlanVolSecuritaire = TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE.isVolumeCarburantSecuritaire(carburant);

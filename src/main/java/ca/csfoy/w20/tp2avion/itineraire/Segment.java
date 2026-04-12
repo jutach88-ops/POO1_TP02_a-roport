@@ -23,8 +23,9 @@ public class Segment {
     }
 
     private void validationDepartArrivee(Aeroport aeroportDepart, Aeroport aeroportArrivee) {
-        if (aeroportDepart == aeroportArrivee) {
-            throw new IllegalArgumentException("Un segment ne peut pas avoir le même départ que la destination");
+        if (aeroportDepart.equals(aeroportArrivee)) {
+            throw new IllegalArgumentException(
+                    "Un segment ne peut pas avoir la même aéroport de départ que l'aéroport de destination");
         }
     }
 

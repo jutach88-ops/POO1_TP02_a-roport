@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItineraireTest {
 
     @Test
-    void etantDonneItinéraireLorsqueSansSegmentAlorsValide() {
+    void etantDonneItinéraireLorsqueSansSegmentAlorsCompteurDeSegmentAttendu() {
         Itineraire itineraire = new Itineraire();
 
         assertEquals(0, itineraire.getNombreDeSegment());
     }
 
     @Test
-    void etantDonneItinéraireLorsqueAjoutDeSegmentAlorsValide() {
+    void etantDonneItinéraireLorsqueAjoutDeSegmentAlorsCompteurDeSegmentAttendu() {
         Itineraire itineraire = new Itineraire();
         Segment segment1 = new Segment(AeroportTest.aeroportYUL, AeroportTest.aeroportYQB);
 
@@ -25,7 +25,7 @@ class ItineraireTest {
     }
 
     @Test
-    void etantDonneItinéraireLorsqueAjoutPlusieursSegmentAlorsValide() {
+    void etantDonneItinéraireLorsqueAjoutPlusieursSegmentAlorsCompteurDeSegmentAttendu() {
         Itineraire itineraire = new Itineraire();
         Segment segment1 = new Segment(AeroportTest.aeroportYUL, AeroportTest.aeroportYQB);
         Segment segment2 = new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportCUN);
@@ -56,21 +56,21 @@ class ItineraireTest {
     }
 
     @Test
-    void etantDonneItineraireLosrqueAucunSegmentAlorsValeurAttendue() {
+    void etantDonneItineraireLorsqueAucunSegmentAlorsValeurDistanceNonAttendue() {
         Itineraire itineraire = new Itineraire();
 
         assertEquals(0, itineraire.getDistance());
     }
 
     @Test
-    void etantDonneItineraireLosrqueUnSeulSegmentAlorsValeurAttendue() {
+    void etantDonneItineraireLorsqueUnSeulSegmentAlorsValeurDistanceAttendue() {
         Itineraire itineraire = TestFactory.ITINERAIRE_COURT_QC_MTL;
 
         assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL, itineraire.getDistance(), 0.01);
     }
 
     @Test
-    void etantDonneItineraireLosrqueSegmentPlusieursSegmentsAlorsValeurAttendue() {
+    void etantDonneItineraireLorsquePlusieursSegmentsAlorsValeurAttendue() {
         Itineraire itineraire = TestFactory.ITINERAIRE_LONG_QC_MTL_TORONTO_PARIS_VANCOUVER;
 
         assertEquals(TestFactory.DISTANCE_QUEBEC_MONTREAL_TORONTO_PARIS_VANCOUVER, itineraire.getDistance(), 0.01);
@@ -128,4 +128,18 @@ class ItineraireTest {
 
         assertTrue(estItineraireValide);
     }
+
+    @Test
+    void etantDonneItineraireLorsqueDeuxChainesSansLiaisonAlorsInvalide() {
+        Itineraire itineraire = new Itineraire();
+        itineraire.ajoutSegment(TestFactory.QUEBEC_MONTREAL);
+        itineraire.ajoutSegment(TestFactory.MONTREAL_TORONTO);
+        itineraire.ajoutSegment(TestFactory.PARIS_VANCOUVER);
+        itineraire.ajoutSegment(TestFactory.VANCOUVER_AMSTERDAM);
+
+        boolean estItineraireValide = itineraire.estItineraireValide();
+
+        assertFalse(estItineraireValide);
+    }
+
 }

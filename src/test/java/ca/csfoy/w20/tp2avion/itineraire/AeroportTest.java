@@ -17,7 +17,7 @@ class AeroportTest {
     public static final Aeroport aeroportMCO = RegistresAeroport.initialiserAeroport(CodeAeroport.MCO);
     public static final Aeroport aeroportCUN = RegistresAeroport.initialiserAeroport(CodeAeroport.CUN);
     public static final Aeroport aeroportCDG = RegistresAeroport.initialiserAeroport(CodeAeroport.CDG);
-    public static final Aeroport aeroportAMS = RegistresAeroport.initialiserAeroport(CodeAeroport.AMS);
+
 
 
 

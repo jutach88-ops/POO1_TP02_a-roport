@@ -74,8 +74,7 @@ public class Avion {
     }
 
     public double getPoidsBagagesEnSoute() {
-        return this.calculerPoids(this.bagagesEnSoute)
-                + this.calculerPoids(this.animauxEnSoute);
+        return this.calculerPoids(this.bagagesEnSoute) + this.calculerPoids(this.animauxEnSoute);
     }
 
     public double getPoidsBagagesEnCabine() {
@@ -83,8 +82,7 @@ public class Avion {
     }
 
     private double getVolumeEnSoute() {
-        return this.calculerVolume(this.bagagesEnSoute)
-                + this.calculerVolume(this.animauxEnSoute);
+        return this.calculerVolume(this.bagagesEnSoute) + this.calculerVolume(this.animauxEnSoute);
     }
 
     private double calculerPoids(ArrayList<Bagage> bagages) {
@@ -108,13 +106,7 @@ public class Avion {
     }
 
     public boolean autoriseADecoller() {
-        return this.isCargoVivantEnSecurite()
-                && this.isCarburantSuffisant()
-                && this.isVolumeBagagesSouteConforme()
-                && this.isVolumeBagagesCabineConforme()
-                && this.isLimitePoidsRespectee()
-                && this.isLimiteVolumeRespectee()
-                && this.planVol.isValide();
+        return this.isCargoVivantEnSecurite() && this.isCarburantSuffisant() && this.isVolumeBagagesSouteConforme() && this.isVolumeBagagesCabineConforme() && this.isLimitePoidsRespectee() && this.isLimiteVolumeRespectee() && this.isPlanVolValide();
     }
 
     /* R2 - Régler le TDA en demandant à l'expert de l'information PlanVol si le cargo est en sécurité. Voir plus
@@ -158,10 +150,11 @@ public class Avion {
     }
 
     private double calculerPoidsChargementTotal() {
-        return this.getPoidsPassagers()
-                + this.getPoidsBagagesEnCabine()
-                + this.getPoidsBagagesEnSoute()
-                + this.carburant.calculerPoidsEnKg();
+        return this.getPoidsPassagers() + this.getPoidsBagagesEnCabine() + this.getPoidsBagagesEnSoute() + this.carburant.calculerPoidsEnKg();
+    }
+
+    private boolean isPlanVolValide() {
+        return this.planVol.isValide();
     }
 
     // ================================
@@ -202,22 +195,7 @@ public class Avion {
 
     @Override
     public String toString() {
-        return "Avion{"
-                + "autoriseADecoller=" + this.autoriseADecoller()
-                + ", capaciteChargementEnKg=" + this.capaciteChargementEnKg
-                + ", capaciteChargementSouteEnLitres=" + this.capaciteChargementSouteEnLitres
-                + ", nbPassagers=" + this.nbPassagers
-                + ", poidsChargementTotal=" + this.getPoidsChargementTotal()
-                + ", volumeOccupeSoute=" + this.getVolumeOccupeSoute()
-                + ", carburant=" + this.carburant
-                + ", planValide=" + this.planVol.isValide()
-                + ", carburantSuffisant=" + this.isCarburantSuffisant()
-                + ", poidsRespete=" + this.isLimitePoidsRespectee()
-                + ", volumeRespete=" + this.isLimiteVolumeRespectee()
-                + ", bagagesSouteConformes=" + this.isVolumeBagagesSouteConforme()
-                + ", bagagesCabineConformes=" + this.isVolumeBagagesCabineConforme()
-                + ", cargoVivantEnSecurite=" + this.isCargoVivantEnSecurite()
-                + "}";
+        return "Avion{" + "autoriseADecoller=" + this.autoriseADecoller() + ", capaciteChargementEnKg=" + this.capaciteChargementEnKg + ", capaciteChargementSouteEnLitres=" + this.capaciteChargementSouteEnLitres + ", nbPassagers=" + this.nbPassagers + ", poidsChargementTotal=" + this.getPoidsChargementTotal() + ", volumeOccupeSoute=" + this.getVolumeOccupeSoute() + ", carburant=" + this.carburant + ", planValide=" + this.isPlanVolValide() + ", carburantSuffisant=" + this.isCarburantSuffisant() + ", poidsRespete=" + this.isLimitePoidsRespectee() + ", volumeRespete=" + this.isLimiteVolumeRespectee() + ", bagagesSouteConformes=" + this.isVolumeBagagesSouteConforme() + ", bagagesCabineConformes=" + this.isVolumeBagagesCabineConforme() + ", cargoVivantEnSecurite=" + this.isCargoVivantEnSecurite() + "}";
 
     }
 }

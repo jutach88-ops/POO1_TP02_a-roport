@@ -6,13 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SegmentTest {
 
-    public static Segment quebecMontreal = new Segment(AeroportTest.aeroportYQB,AeroportTest.aeroportYUL);
-    public static Segment montrealToronto = new Segment(AeroportTest.aeroportYUL,AeroportTest.aeroportYYZ);
-    public static Segment torontoVancouver = new Segment(AeroportTest.aeroportYYZ,AeroportTest.aeroportYVR);
-    public static Segment vancouverOrlando = new Segment(AeroportTest.aeroportYVR,AeroportTest.aeroportMCO);
-    public static Segment orlandoCancun = new Segment(AeroportTest.aeroportMCO,AeroportTest.aeroportCUN);
-    public static Segment cancunParis = new Segment(AeroportTest.aeroportCUN,AeroportTest.aeroportCDG);
-
     @Test
     void etantDonneSegmentLorsqueInstantiationParametreValideAlorsValide() {
         Segment segment = new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYUL);
@@ -33,6 +26,7 @@ class SegmentTest {
 
     @Test
     void etantDonneSegmentLorsqueInstantiationMemeAeroportArriveeDepartAlorsNonValide() {
-        assertThrows(IllegalArgumentException.class, () -> new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYQB));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Segment(AeroportTest.aeroportYQB, AeroportTest.aeroportYQB));
     }
 }

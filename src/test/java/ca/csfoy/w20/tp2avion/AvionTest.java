@@ -42,6 +42,12 @@ class AvionTest {
                         / Carburant.SECONDES_PAR_HEURE);
     }
 
+    /*
+     * Dans le code fourni pour les tests, il y a ici une petite incohérence, car pour calculer le volume de carburant l'on retourne un double
+     * pour avoir une certaine précision, cependant, en faisant un Math.ceil() l'on retourne une valeur de carburant arrondit au plus haut, donc toujours
+     * (valeur X.0).
+     * */
+
     @BeforeEach
     public void setUp() {
         this.planVolCourt = new PlanVol(
@@ -228,29 +234,29 @@ class AvionTest {
     }
 
     @Test
-    public void etantDonneAvionLorsqueItineraireInvalideAlorsNonAutoriseeADecoller() {
-        Itineraire itineraireInvalide =
-                TestFactory.constructeurItineraire(TestFactory.QUEBEC_MONTREAL, TestFactory.QUEBEC_TORONTO);
-        PlanVol planDeVolInvalide = new PlanVol(itineraireInvalide, TestFactory.VITESSE_DE_CROISIERE,
+    public void etantDonneAvionLorsqueItineraireValideAlorsAutoriseeADecoller() {
+        Itineraire itineraireValide =
+                TestFactory.constructeurItineraire(TestFactory.QUEBEC_TORONTO, TestFactory.TORONTO_PARIS);
+        PlanVol planDeVolValide = new PlanVol(itineraireValide, TestFactory.VITESSE_DE_CROISIERE,
                 TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
-        Avion avion = new Avion(planDeVolInvalide, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
-        Carburant carburant = new Carburant(AvionTest.VOLUME_CARBURANT_EN_LITRE);
-
+        Avion avion = new Avion(planDeVolValide, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
+        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_TOR_PA);
         avion.remplir(carburant);
+        avion.ajouterPassagers(80);
 
-        assertFalse(avion.autoriseADecoller());
+        assertTrue(avion.autoriseADecoller());
     }
 
     @Test
-    public void etantDonneAvionLorsqueItineraireValideAlorsAutoriseeADecoller() {
+    public void etantDonneAvionLorsqueItineraireNonValideAlorsNonAutoriseeADecoller() {
         Itineraire itineraireInvalide =
-                TestFactory.constructeurItineraire(TestFactory.QUEBEC_MONTREAL, TestFactory.MONTREAL_TORONTO, TestFactory.TORONTO_PARIS, TestFactory.PARIS_VANCOUVER);
+                TestFactory.constructeurItineraire(TestFactory.QUEBEC_TORONTO, TestFactory.PARIS_TORONTO);
         PlanVol planDeVolInvalide = new PlanVol(itineraireInvalide, TestFactory.VITESSE_DE_CROISIERE,
                 TestFactory.RESERVE_DE_CARBURANT_MINIMAL);
         Avion avion = new Avion(planDeVolInvalide, AvionTest.CAPACITE_POIDS_KG, AvionTest.CAPACITE_SOUTE_LITRES);
-        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_TOR_PA_VAN);
-
+        Carburant carburant = new Carburant(TestFactory.LITRE_CARBURANT_QC_TOR_PA);
         avion.remplir(carburant);
+        avion.ajouterPassagers(80);
 
         assertFalse(avion.autoriseADecoller());
     }
@@ -267,7 +273,7 @@ class AvionTest {
     }
 
     @Test
-    public void etantDonneAvionLorsqueCarburantInsuffisantSansReserveAlorsLAvionNestPasAutoriseeADecoller() {
+    public void etantDonneAvionLorsqueCarburantInsuffisantSansReserveAlorsAvionNestPasAutoriseeADecoller() {
         Avion avion = new Avion(TestFactory.PLAN_VOL_QC_MTL_AVEC_RESERVE, AvionTest.CAPACITE_POIDS_KG,
                 AvionTest.CAPACITE_SOUTE_LITRES);
         Carburant carburantInsuffisant = new Carburant(TestFactory.LITRE_CARBURANT_QC_MTL_MOINS_UNE_SECONDE);
@@ -284,6 +290,13 @@ class AvionTest {
         Carburant carburantSuffisant = new Carburant(TestFactory.LITRE_CARBURANT_NECESSAIRE_QC_MTL_AJUSTE);
 
         avion.remplir(carburantSuffisant);
+
+        assertTrue(avion.autoriseADecoller());
+    }
+
+    @Test
+    public void etantDonneAvionLorsqueToutesConditionsValidesAlorsAutoriseeADecoller() {
+        Avion avion = TestFactory.AVION_AUTORISEE_DECOLLER_QC_TOR_PA;
 
         assertTrue(avion.autoriseADecoller());
     }

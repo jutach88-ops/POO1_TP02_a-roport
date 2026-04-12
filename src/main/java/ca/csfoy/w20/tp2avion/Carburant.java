@@ -1,5 +1,6 @@
 package ca.csfoy.w20.tp2avion;
 
+import static java.lang.Math.ceil;
 import static java.lang.Math.round;
 
 public class Carburant {

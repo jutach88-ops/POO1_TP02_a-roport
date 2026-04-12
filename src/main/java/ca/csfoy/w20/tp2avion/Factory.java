@@ -10,14 +10,14 @@ public class Factory {
 
     //Creation Aeroport
 
-    public static final Aeroport aeroportYQB = RegistresAeroport.initialiserAeroport(CodeAeroport.YQB);
-    public static final Aeroport aeroportYYZ = RegistresAeroport.initialiserAeroport(CodeAeroport.YYZ);
-    public static final Aeroport aeroportCDG = RegistresAeroport.initialiserAeroport(CodeAeroport.CDG);
+    public static final Aeroport AEROPORT_YQB = RegistresAeroport.initialiserAeroport(CodeAeroport.YQB);
+    public static final Aeroport AEROPORT_YYZ = RegistresAeroport.initialiserAeroport(CodeAeroport.YYZ);
+    public static final Aeroport AEROPORT_CDG = RegistresAeroport.initialiserAeroport(CodeAeroport.CDG);
 
     // Creation de Segments
 
-    public static Segment torontoParis = new Segment(aeroportYYZ, aeroportCDG);
-    public static Segment quebecToronto = new Segment(aeroportYQB, aeroportYYZ);
+    public static final Segment TORONTO_PARIS = new Segment(AEROPORT_YYZ, AEROPORT_CDG);
+    public static  final Segment QUEBEC_TORONTO = new Segment(AEROPORT_YQB, AEROPORT_YYZ);
 
     // Creation d'itinéraires
     public static Itineraire constructeurItineraire(Segment... segments) {
@@ -30,7 +30,8 @@ public class Factory {
         return itineraire;
     }
 
-    public static Itineraire itineraireLongQcTorontoParis = constructeurItineraire(quebecToronto, torontoParis);
+    public static final Itineraire
+            ITINERAIRE_LONG_QC_TORONTO_PARIS = constructeurItineraire(QUEBEC_TORONTO, TORONTO_PARIS);
 }
 
 

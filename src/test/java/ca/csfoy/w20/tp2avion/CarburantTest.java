@@ -66,7 +66,6 @@ class CarburantTest {
     @Test
     public void etantDonneeCarburantLorsqueCarburantPrevuMoinUneSecondeAlorsEstInvalide() {
         Carburant carburant = new Carburant(TestFactory.CARBURANT_MOINS_UNE_SECONDE_QC_MTL);
-
         boolean estCarburantSuffisant = carburant.hasAutonomieSecondes(TestFactory.DUREE_SECONDE_PREVU_QC_MTL);
 
         assertFalse(estCarburantSuffisant);

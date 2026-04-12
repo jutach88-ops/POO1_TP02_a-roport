@@ -1,9 +1,6 @@
 package ca.csfoy.w20.tp2avion;
 
 import ca.csfoy.w20.tp2avion.bagage.Bagage;
-import ca.csfoy.w20.tp2avion.itineraire.Aeroport;
-import ca.csfoy.w20.tp2avion.itineraire.Itineraire;
-import ca.csfoy.w20.tp2avion.itineraire.Segment;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +11,7 @@ public class Main {
 
     public Main() {
 
-        PlanVol planVol = new PlanVol(Factory.itineraireLongQcTorontoParis, 800, 0.18);
+        PlanVol planVol = new PlanVol(Factory.ITINERAIRE_LONG_QC_TORONTO_PARIS, 800, 0.18);
 
         this.avion = new Avion(
                 planVol,
